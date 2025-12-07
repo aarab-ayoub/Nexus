@@ -1,0 +1,101 @@
+user_id,signup_date,country
+user1,2020-05-02 09:26:41,Ecuador
+user2,2021-05-30 09:59:39,Saint Barthelemy
+user3,2020-03-27 21:16:06,United Kingdom
+user4,2021-10-29 09:48:00,Liechtenstein
+user5,2025-05-13 01:59:05,Reunion
+user6,2025-07-12 16:17:00,Georgia
+user7,2022-12-16 06:55:23,Moldova
+user8,2023-05-17 04:24:56,Marshall Islands
+user9,2020-04-12 14:37:58,Seychelles
+user10,2025-02-17 01:59:46,Gibraltar
+user11,2025-09-09 03:33:26,Ecuador
+user12,2022-07-13 09:49:46,Guinea-Bissau
+user13,2020-06-19 23:54:26,Norfolk Island
+user14,2020-06-30 23:40:22,Eritrea
+user15,2024-10-26 01:53:55,Antigua and Barbuda
+user16,2020-06-26 07:38:53,Gambia
+user17,2020-07-02 05:32:45,Seychelles
+user18,2020-10-31 18:52:23,Greenland
+user19,2023-04-28 16:18:32,Montserrat
+user20,2022-01-29 11:47:47,Peru
+user21,2021-01-04 22:04:53,Denmark
+user22,2025-04-01 22:41:10,Cote d'Ivoire
+user23,2020-07-04 16:29:16,Syrian Arab Republic
+user24,2020-07-04 12:12:35,Marshall Islands
+user25,2022-05-16 04:20:55,Montserrat
+user26,2022-04-11 21:34:58,Netherlands
+user27,2024-06-08 09:21:34,Uganda
+user28,2021-02-16 13:13:13,South Georgia and the South Sandwich Islands
+user29,2021-04-09 00:02:35,Luxembourg
+user30,2022-10-29 21:05:15,Nigeria
+user31,2024-09-10 20:53:42,New Caledonia
+user32,2024-05-24 21:14:00,Tuvalu
+user33,2024-10-24 10:57:27,Kyrgyz Republic
+user34,2021-12-16 10:23:35,Tunisia
+user35,2021-08-17 04:49:37,Lebanon
+user36,2020-12-12 01:12:37,French Polynesia
+user37,2022-04-19 03:04:57,Iraq
+user38,2020-06-29 10:31:30,Tokelau
+user39,2020-11-02 10:51:52,Svalbard & Jan Mayen Islands
+user40,2023-06-01 20:17:21,Marshall Islands
+user41,2024-10-25 07:37:22,Heard Island and McDonald Islands
+user42,2022-05-26 17:10:40,Slovakia (Slovak Republic)
+user43,2024-07-20 10:18:51,Vietnam
+user44,2024-08-26 17:12:06,Barbados
+user45,2020-01-13 13:29:47,Latvia
+user46,2022-12-05 08:07:18,South Georgia and the South Sandwich Islands
+user47,2024-06-19 13:35:59,Syrian Arab Republic
+user48,2024-07-11 09:26:44,Saint Lucia
+user49,2024-01-05 11:04:55,Uzbekistan
+user50,2023-07-21 15:42:30,Tajikistan
+user51,2025-11-15 20:15:59,Falkland Islands (Malvinas)
+user52,2020-11-05 23:10:26,Spain
+user53,2023-08-25 01:05:19,Sweden
+user54,2021-12-30 10:51:09,Mayotte
+user55,2025-01-28 00:13:27,Western Sahara
+user56,2020-10-06 23:09:07,Guinea
+user57,2023-09-25 18:24:28,Mauritania
+user58,2020-05-19 07:32:54,Ukraine
+user59,2023-01-30 23:27:23,Pitcairn Islands
+user60,2023-10-20 13:29:39,Qatar
+user61,2020-03-17 20:30:55,United States Minor Outlying Islands
+user62,2023-07-10 13:26:15,Togo
+user63,2022-06-20 00:54:10,Palestinian Territory
+user64,2020-06-22 21:09:10,Poland
+user65,2023-09-24 19:45:48,Grenada
+user66,2023-11-07 08:02:29,Bahrain
+user67,2021-05-14 00:35:31,Marshall Islands
+user68,2021-06-16 18:29:21,French Polynesia
+user69,2024-02-11 04:42:09,British Virgin Islands
+user70,2024-07-31 16:10:43,Cayman Islands
+user71,2024-08-16 23:31:53,Honduras
+user72,2025-09-22 00:42:40,Netherlands
+user73,2022-06-22 02:02:04,Mayotte
+user74,2020-01-14 18:01:03,Netherlands
+user75,2021-04-13 20:59:39,Philippines
+user76,2024-10-08 10:01:52,Heard Island and McDonald Islands
+user77,2024-01-19 20:07:52,Cocos (Keeling) Islands
+user78,2020-11-15 11:13:59,Gambia
+user79,2021-07-17 21:01:51,Jordan
+user80,2025-06-20 03:55:15,Timor-Leste
+user81,2022-12-21 01:34:34,Turkey
+user82,2022-09-08 02:37:16,South Africa
+user83,2020-05-11 18:50:33,Saint Kitts and Nevis
+user84,2020-10-19 10:41:20,Falkland Islands (Malvinas)
+user85,2024-10-14 04:02:02,Lebanon
+user86,2022-05-19 08:11:47,Aruba
+user87,2022-04-11 01:42:43,Albania
+user88,2023-03-20 21:51:09,Cote d'Ivoire
+user89,2020-09-17 12:17:10,Mongolia
+user90,2024-06-21 18:48:45,Dominican Republic
+user91,2021-03-31 03:29:33,Myanmar
+user92,2025-05-16 15:23:31,Saint Martin
+user93,2020-02-11 07:46:26,Finland
+user94,2021-11-15 03:38:26,Netherlands
+user95,2023-08-15 17:04:48,Netherlands
+user96,2023-05-07 21:24:04,Fiji
+user97,2022-01-08 19:48:01,Central African Republic
+user98,2020-05-16 06:09:46,Rwanda
+user99,2020-05-23 04:59:11,American Samoa
+user100,2020-02-25 10:21:39,Saint Helena
