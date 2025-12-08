@@ -1,0 +1,101 @@
+user_id,signup_date,country
+user1,2024-08-02 01:03:50,Burkina Faso
+user2,2020-09-10 03:59:00,Slovenia
+user3,2023-10-11 01:37:12,Belize
+user4,2022-03-13 00:47:29,Nepal
+user5,2020-03-06 10:24:23,Belize
+user6,2023-01-15 01:21:10,El Salvador
+user7,2021-10-05 12:43:45,El Salvador
+user8,2023-11-20 13:09:31,Algeria
+user9,2020-02-24 07:31:50,Slovakia (Slovak Republic)
+user10,2024-05-21 02:35:38,Congo
+user11,2025-08-20 05:56:51,Timor-Leste
+user12,2025-08-03 11:51:51,Wallis and Futuna
+user13,2023-05-23 06:57:00,Saint Martin
+user14,2022-09-01 12:27:59,United Kingdom
+user15,2024-03-23 08:18:00,Aruba
+user16,2023-01-26 23:18:45,Trinidad and Tobago
+user17,2022-07-01 00:23:34,Aruba
+user18,2022-01-05 03:17:41,French Polynesia
+user19,2020-06-03 09:38:55,United Arab Emirates
+user20,2021-04-07 15:48:05,Liechtenstein
+user21,2023-07-15 16:21:10,Northern Mariana Islands
+user22,2025-10-02 14:28:53,Hungary
+user23,2023-08-01 04:50:03,Puerto Rico
+user24,2023-03-14 13:20:57,Armenia
+user25,2024-03-14 19:10:02,Dominican Republic
+user26,2020-07-03 12:06:08,Paraguay
+user27,2024-05-17 03:18:05,Venezuela
+user28,2023-12-26 22:59:26,Samoa
+user29,2020-03-06 07:16:36,Estonia
+user30,2020-05-26 22:55:08,Cape Verde
+user31,2021-07-15 17:54:24,Mauritius
+user32,2025-03-24 12:25:52,Turkey
+user33,2022-01-05 18:13:06,Central African Republic
+user34,2020-03-09 07:13:49,Cyprus
+user35,2020-11-06 05:41:02,Netherlands
+user36,2022-03-24 17:59:16,Papua New Guinea
+user37,2025-01-26 05:02:32,Indonesia
+user38,2023-07-07 10:22:33,Turkey
+user39,2020-06-07 09:52:39,Grenada
+user40,2021-04-17 00:34:35,Netherlands
+user41,2023-11-28 13:59:01,Bhutan
+user42,2022-05-29 13:32:15,India
+user43,2024-02-02 08:08:27,Djibouti
+user44,2023-03-03 20:46:14,Greece
+user45,2023-09-05 05:42:16,Panama
+user46,2022-10-31 20:08:39,Mali
+user47,2023-06-30 21:42:58,Monaco
+user48,2023-04-20 13:22:10,Cuba
+user49,2021-01-18 06:42:27,Poland
+user50,2025-03-24 05:55:53,Isle of Man
+user51,2021-06-07 03:21:12,Guinea-Bissau
+user52,2024-10-24 17:28:40,Sudan
+user53,2023-04-28 07:52:00,Cote d'Ivoire
+user54,2021-01-11 03:52:11,New Zealand
+user55,2023-11-21 22:41:08,Antarctica (the territory South of 60 deg S)
+user56,2022-05-17 05:25:37,Guatemala
+user57,2023-05-11 15:59:41,Israel
+user58,2022-02-05 20:29:08,Portugal
+user59,2023-01-25 20:24:36,Guam
+user60,2022-02-01 10:09:05,Belize
+user61,2025-06-08 07:23:12,Oman
+user62,2024-04-22 07:32:17,British Indian Ocean Territory (Chagos Archipelago)
+user63,2022-09-06 08:57:12,Jamaica
+user64,2020-06-09 00:00:02,Lesotho
+user65,2024-04-04 09:29:42,Iraq
+user66,2024-02-09 14:41:41,Brunei Darussalam
+user67,2022-02-27 10:47:19,Saint Kitts and Nevis
+user68,2025-09-17 06:27:01,Central African Republic
+user69,2021-04-21 00:55:45,Kyrgyz Republic
+user70,2020-02-29 23:04:25,Saint Lucia
+user71,2024-10-03 10:36:00,Isle of Man
+user72,2023-04-18 06:43:07,Saudi Arabia
+user73,2020-02-14 20:07:28,Sudan
+user74,2023-04-05 03:23:20,Spain
+user75,2023-12-28 23:32:55,Guatemala
+user76,2025-05-18 16:13:02,Panama
+user77,2020-09-16 11:56:16,Saint Martin
+user78,2025-09-05 11:16:23,Maldives
+user79,2023-05-04 05:59:15,Jersey
+user80,2021-02-17 16:36:53,Lesotho
+user81,2020-05-06 00:00:18,Cocos (Keeling) Islands
+user82,2024-11-16 00:49:30,Macao
+user83,2020-09-07 17:31:28,Niger
+user84,2023-10-28 08:01:08,Zambia
+user85,2021-05-17 14:46:53,Bangladesh
+user86,2020-06-12 19:58:03,Antigua and Barbuda
+user87,2023-10-07 09:00:45,Mauritania
+user88,2020-11-29 15:40:29,Wallis and Futuna
+user89,2023-01-03 12:27:52,Bhutan
+user90,2023-12-12 19:26:12,Israel
+user91,2023-11-12 11:48:02,Chad
+user92,2020-01-10 17:14:47,Maldives
+user93,2020-07-31 22:25:53,United Arab Emirates
+user94,2021-01-13 07:08:17,Mayotte
+user95,2025-07-07 07:42:12,Mali
+user96,2023-08-23 09:48:22,United Arab Emirates
+user97,2020-10-19 20:14:35,Cote d'Ivoire
+user98,2021-11-18 00:55:04,Korea
+user99,2023-04-17 01:36:11,Netherlands Antilles
+user100,2024-02-07 17:59:29,Iceland

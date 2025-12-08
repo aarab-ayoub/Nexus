@@ -3,10 +3,14 @@ from faker import Faker
 import datetime
 import random
 
+from kafka import KafkaProducer
+import json
+import time
+
 fake = Faker()
 
 def generate_users_data(num_users=100):
-	with open('Users.csv' , 'w' , newline='') as file:
+	with open('/app/data/Users.csv' , 'w' , newline='') as file:
 		writer = csv.writer(file)
 		user_list = []
 		writer.writerow(['user_id' , 'signup_date' , 'country'])
@@ -20,7 +24,7 @@ def generate_users_data(num_users=100):
 	return user_list
 
 def generate_products_data(num_products=200):
-	with open('Products.csv', 'w' , newline='') as file1:
+	with open('/app/data/Products.csv', 'w' , newline='') as file1:
 		writer1 = csv.writer(file1)
 		prod_list = []
 		l = ['electronics', 'books', 'clothing', 'home goods', 'sports']
@@ -36,7 +40,7 @@ def generate_products_data(num_products=200):
 	return prod_list
 
 def generate_orders_data(user_ids, product_ids, num_orders=1000):
-	with open('Orders.csv' , 'w' , newline='') as file:
+	with open('/app/data/Orders.csv' , 'w' , newline='') as file:
 		writer = csv.writer(file)
 		writer.writerow(['order_id', 'user_id', 'product_id', 'quantity','total_amount'])
 
@@ -49,6 +53,45 @@ def generate_orders_data(user_ids, product_ids, num_orders=1000):
 
 			writer.writerow([order_id,user_id,product_id,quantity,total_amount,])
 
+#Streaming data part
+def generate_click_events(user_ids):
+	producer = None
+	for _ in range(10):
+		try:
+			producer = KafkaProducer(
+				bootstrap_servers=['kafka:29092'],
+				value_serializer=lambda v: json.dumps(v).encode('utf-8')
+			)
+			print("Kafka connection successful")
+			break
+		except Exception as e:
+			print(f"Kafka connection failed, retrying... {_+1}/10")
+			time.sleep(5)
+	if producer is None:
+		print("Failed to connect to Kafka after multiple attempts. Exiting.")
+		return
+
+	l =['view_item', 'add_to_cart', 'checkout']
+	event_id_counter = 0
+	while(1):
+		user_id = random.choice(user_ids)
+		url = fake.uri_path()
+		f_timestamp = datetime.datetime.now().isoformat()
+		event = random.choice(l)
+
+		event_id_counter += 1
+		event_dic = {
+			"eventid" : f'evt{event_id_counter}',
+			"userid": user_id,
+			"url": url,
+			"timestamp": f_timestamp,
+			"action": event
+			}
+
+		producer.send('clicks_topic' , event_dic)
+
+		print(event_dic)
+		time.sleep(1)
 
 if __name__ == "__main__":
 	
@@ -60,3 +103,4 @@ if __name__ == "__main__":
 	product_ids =generate_products_data(num_products)
 
 	generate_orders_data(user_ids , product_ids ,num_orders)
+	generate_click_events(user_ids)
