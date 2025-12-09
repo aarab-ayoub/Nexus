@@ -44,20 +44,20 @@ if __name__ == "__main__":
 	s3_client = get_s3_client()
 	if s3_client:
 		now= datetime.datetime.now()
-		day = now.day
-		month = now.month
-		year = now.year
+		day = now.strftime("%d")
+		month = now.strftime("%m")
+		year = now.strftime("%Y")
 
 		files = os.listdir(LOCAL_DATA_PATH)
 		total_uploaded = 0
-		bucket = s3_client.create_bucket(Bucket=BUCKET_NAME)
+		# bucket = s3_client.create_bucket(Bucket=BUCKET_NAME)
 		for i in files:
 			if(i.endswith('.csv') == True):
 				s3_object_name = f"{year}/{month}/{day}/{i}"
 				local_files = os.path.join(LOCAL_DATA_PATH , i)
-				uploaded = upload_files_to_s3(s3_client , bucket , local_files , s3_object_name)
+				uploaded = upload_files_to_s3(s3_client , BUCKET_NAME , local_files , s3_object_name)
 				total_uploaded += uploaded
-			else:
-				print(f"Skipped non-CSV file: {i}")
+			elif not os.path.isdir(LOCAL_DATA_PATH):
+				print(f"{LOCAL_DATA_PATH} is not a directory")
 		print(f"Total files uploaded: {total_uploaded}")
 
