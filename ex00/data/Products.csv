@@ -1,201 +1,201 @@
 product_id,category,price
-prod1,sports,180.53
-prod2,home goods,159.5
-prod3,home goods,389.19
-prod4,home goods,324.06
-prod5,sports,38.49
-prod6,books,853.94
-prod7,clothing,942.79
-prod8,books,996.47
-prod9,sports,656.4
-prod10,sports,346.77
-prod11,electronics,780.31
-prod12,books,251.52
-prod13,electronics,869.27
-prod14,clothing,597.98
-prod15,books,324.32
-prod16,home goods,935.11
-prod17,books,470.39
-prod18,home goods,767.12
-prod19,electronics,946.22
-prod20,home goods,993.85
-prod21,books,809.7
-prod22,electronics,990.98
-prod23,sports,463.71
-prod24,sports,621.12
-prod25,clothing,857.67
-prod26,electronics,906.81
-prod27,electronics,221.01
-prod28,clothing,528.82
-prod29,books,263.0
-prod30,clothing,188.01
-prod31,clothing,678.36
-prod32,clothing,830.41
-prod33,electronics,584.0
-prod34,sports,248.8
-prod35,sports,756.37
-prod36,books,558.14
-prod37,home goods,96.89
-prod38,clothing,992.22
-prod39,home goods,335.2
-prod40,sports,600.4
-prod41,sports,207.13
-prod42,clothing,447.58
-prod43,home goods,719.15
-prod44,sports,261.14
-prod45,books,582.9
-prod46,clothing,841.23
-prod47,clothing,702.57
-prod48,sports,586.25
-prod49,home goods,980.06
-prod50,books,246.87
-prod51,sports,886.66
-prod52,clothing,514.67
-prod53,home goods,963.66
-prod54,electronics,776.34
-prod55,sports,192.51
-prod56,home goods,234.54
-prod57,home goods,625.03
-prod58,clothing,650.17
-prod59,electronics,781.25
-prod60,electronics,575.82
-prod61,home goods,991.5
-prod62,electronics,583.47
-prod63,books,760.8
-prod64,sports,722.6
-prod65,books,815.56
-prod66,sports,267.57
-prod67,home goods,832.49
-prod68,books,252.07
-prod69,home goods,939.9
-prod70,clothing,485.98
-prod71,clothing,715.0
-prod72,books,387.78
-prod73,books,434.61
-prod74,clothing,647.62
-prod75,clothing,718.51
-prod76,electronics,592.7
-prod77,books,65.6
-prod78,books,18.7
-prod79,electronics,241.78
-prod80,sports,252.22
-prod81,clothing,779.73
-prod82,clothing,973.82
-prod83,home goods,423.33
-prod84,sports,680.67
-prod85,home goods,733.89
-prod86,clothing,452.95
-prod87,clothing,329.66
-prod88,books,398.39
-prod89,electronics,667.72
-prod90,home goods,369.43
-prod91,clothing,765.38
-prod92,home goods,483.06
-prod93,electronics,993.89
-prod94,sports,575.33
-prod95,sports,595.88
-prod96,books,329.1
-prod97,sports,984.81
-prod98,books,990.33
-prod99,home goods,99.05
-prod100,books,167.55
-prod101,home goods,158.45
-prod102,books,22.36
-prod103,clothing,430.86
-prod104,sports,741.08
-prod105,electronics,720.56
-prod106,sports,103.42
-prod107,books,813.04
-prod108,home goods,317.71
-prod109,clothing,274.37
-prod110,books,941.51
-prod111,home goods,324.77
-prod112,sports,641.61
-prod113,clothing,645.68
-prod114,electronics,236.87
-prod115,clothing,707.32
-prod116,home goods,556.97
-prod117,electronics,590.95
-prod118,books,487.92
-prod119,sports,746.11
-prod120,books,696.4
-prod121,clothing,31.39
-prod122,clothing,107.01
-prod123,clothing,569.07
-prod124,home goods,99.63
-prod125,electronics,715.73
-prod126,electronics,604.87
-prod127,sports,43.93
-prod128,electronics,443.83
-prod129,electronics,467.18
-prod130,clothing,145.3
-prod131,sports,448.9
-prod132,sports,265.74
-prod133,home goods,628.49
-prod134,electronics,493.81
-prod135,electronics,234.36
-prod136,clothing,372.99
-prod137,electronics,668.01
-prod138,home goods,680.23
-prod139,electronics,621.56
-prod140,clothing,664.03
-prod141,electronics,55.47
-prod142,sports,723.86
-prod143,books,700.26
-prod144,books,727.79
-prod145,home goods,420.3
-prod146,home goods,978.49
-prod147,home goods,195.37
-prod148,books,971.07
-prod149,clothing,737.32
-prod150,clothing,531.19
-prod151,books,426.82
-prod152,clothing,175.78
-prod153,home goods,424.61
-prod154,electronics,650.55
-prod155,electronics,349.67
-prod156,sports,333.61
-prod157,sports,246.63
-prod158,electronics,723.68
-prod159,sports,365.56
-prod160,home goods,319.67
-prod161,home goods,846.05
-prod162,electronics,662.31
-prod163,sports,696.51
-prod164,books,596.54
-prod165,clothing,977.16
-prod166,clothing,428.08
-prod167,electronics,659.05
-prod168,home goods,127.86
-prod169,sports,678.33
-prod170,electronics,486.52
-prod171,books,270.65
-prod172,electronics,627.29
-prod173,clothing,309.6
-prod174,clothing,903.12
-prod175,sports,213.45
-prod176,electronics,70.9
-prod177,electronics,379.62
-prod178,home goods,950.34
-prod179,clothing,439.24
-prod180,clothing,985.07
-prod181,electronics,327.68
-prod182,sports,552.93
-prod183,books,322.2
-prod184,books,639.81
-prod185,books,918.78
-prod186,sports,813.06
-prod187,books,134.54
-prod188,electronics,112.44
-prod189,clothing,105.24
-prod190,clothing,219.45
-prod191,home goods,588.21
-prod192,clothing,982.0
-prod193,clothing,729.51
-prod194,books,825.64
-prod195,home goods,581.4
-prod196,clothing,387.45
-prod197,books,889.1
-prod198,home goods,201.59
-prod199,electronics,494.88
-prod200,electronics,979.01
+prod1,books,163.42
+prod2,sports,928.19
+prod3,clothing,25.36
+prod4,sports,542.85
+prod5,electronics,405.7
+prod6,electronics,599.67
+prod7,sports,586.75
+prod8,home goods,501.5
+prod9,books,766.16
+prod10,clothing,739.8
+prod11,home goods,901.74
+prod12,books,993.79
+prod13,home goods,30.16
+prod14,electronics,360.46
+prod15,clothing,468.9
+prod16,electronics,657.66
+prod17,electronics,701.64
+prod18,home goods,636.58
+prod19,sports,597.0
+prod20,electronics,877.57
+prod21,sports,539.86
+prod22,sports,852.88
+prod23,books,192.95
+prod24,clothing,395.19
+prod25,clothing,586.14
+prod26,sports,8.14
+prod27,books,263.45
+prod28,electronics,900.05
+prod29,electronics,312.87
+prod30,clothing,799.25
+prod31,clothing,120.28
+prod32,sports,700.1
+prod33,electronics,830.95
+prod34,home goods,194.59
+prod35,home goods,729.84
+prod36,clothing,328.8
+prod37,sports,489.44
+prod38,electronics,241.2
+prod39,clothing,342.82
+prod40,electronics,455.8
+prod41,books,527.22
+prod42,sports,217.6
+prod43,home goods,125.58
+prod44,home goods,146.52
+prod45,sports,817.9
+prod46,books,655.76
+prod47,electronics,202.06
+prod48,sports,560.05
+prod49,books,22.31
+prod50,books,328.33
+prod51,clothing,301.69
+prod52,sports,721.55
+prod53,books,34.28
+prod54,electronics,766.35
+prod55,home goods,203.43
+prod56,books,22.79
+prod57,home goods,210.46
+prod58,books,311.94
+prod59,books,219.79
+prod60,clothing,209.77
+prod61,electronics,124.88
+prod62,clothing,430.12
+prod63,home goods,400.89
+prod64,books,870.24
+prod65,electronics,781.11
+prod66,sports,692.42
+prod67,books,413.23
+prod68,books,148.04
+prod69,electronics,733.74
+prod70,sports,146.42
+prod71,clothing,476.62
+prod72,books,228.9
+prod73,books,21.22
+prod74,sports,892.01
+prod75,sports,910.29
+prod76,sports,963.17
+prod77,books,151.95
+prod78,clothing,420.06
+prod79,sports,495.21
+prod80,electronics,292.46
+prod81,electronics,216.48
+prod82,books,715.83
+prod83,books,375.75
+prod84,home goods,674.22
+prod85,books,362.73
+prod86,clothing,983.7
+prod87,sports,208.46
+prod88,sports,153.59
+prod89,sports,406.46
+prod90,clothing,718.83
+prod91,books,695.4
+prod92,electronics,633.57
+prod93,sports,419.47
+prod94,home goods,490.71
+prod95,home goods,92.51
+prod96,sports,549.15
+prod97,clothing,612.44
+prod98,clothing,711.05
+prod99,books,855.41
+prod100,home goods,116.17
+prod101,sports,99.4
+prod102,clothing,516.07
+prod103,books,402.86
+prod104,sports,167.27
+prod105,electronics,778.86
+prod106,clothing,198.84
+prod107,home goods,398.99
+prod108,home goods,740.16
+prod109,sports,438.18
+prod110,sports,452.59
+prod111,electronics,902.86
+prod112,home goods,152.88
+prod113,sports,464.03
+prod114,books,763.78
+prod115,clothing,518.33
+prod116,sports,591.69
+prod117,sports,417.82
+prod118,sports,37.94
+prod119,home goods,742.23
+prod120,clothing,47.91
+prod121,sports,15.74
+prod122,home goods,109.95
+prod123,clothing,871.11
+prod124,electronics,592.5
+prod125,electronics,768.15
+prod126,sports,344.31
+prod127,home goods,473.32
+prod128,electronics,467.14
+prod129,home goods,504.76
+prod130,electronics,193.06
+prod131,clothing,216.91
+prod132,sports,990.59
+prod133,clothing,325.4
+prod134,books,163.39
+prod135,sports,742.83
+prod136,clothing,520.41
+prod137,electronics,368.34
+prod138,sports,859.37
+prod139,clothing,15.2
+prod140,clothing,800.14
+prod141,home goods,928.84
+prod142,clothing,463.19
+prod143,sports,652.08
+prod144,books,568.63
+prod145,sports,143.65
+prod146,home goods,249.33
+prod147,books,504.94
+prod148,home goods,385.41
+prod149,home goods,837.56
+prod150,sports,899.19
+prod151,sports,816.61
+prod152,books,818.51
+prod153,home goods,167.73
+prod154,books,211.43
+prod155,home goods,464.44
+prod156,electronics,966.31
+prod157,books,741.68
+prod158,clothing,458.39
+prod159,home goods,249.18
+prod160,books,230.38
+prod161,sports,139.31
+prod162,books,953.66
+prod163,sports,108.01
+prod164,books,606.2
+prod165,electronics,845.35
+prod166,home goods,777.08
+prod167,clothing,895.32
+prod168,clothing,593.78
+prod169,sports,223.29
+prod170,clothing,150.98
+prod171,home goods,626.52
+prod172,books,373.89
+prod173,sports,219.06
+prod174,books,452.9
+prod175,clothing,387.4
+prod176,home goods,525.31
+prod177,clothing,188.05
+prod178,books,72.62
+prod179,books,522.83
+prod180,clothing,880.23
+prod181,electronics,200.64
+prod182,clothing,690.0
+prod183,books,696.42
+prod184,clothing,369.5
+prod185,electronics,814.33
+prod186,home goods,649.68
+prod187,home goods,647.65
+prod188,electronics,600.64
+prod189,sports,123.51
+prod190,clothing,898.48
+prod191,books,201.6
+prod192,clothing,185.55
+prod193,electronics,427.07
+prod194,sports,655.76
+prod195,home goods,863.03
+prod196,clothing,215.41
+prod197,clothing,871.97
+prod198,books,325.52
+prod199,electronics,976.67
+prod200,electronics,697.9
