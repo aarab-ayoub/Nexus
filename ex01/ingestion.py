@@ -4,7 +4,7 @@ from botocore.exceptions import NoCredentialsError
 import datetime
 from kafka import KafkaConsumer
 import json
-
+import time
 
 MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "localhost:9000")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
@@ -43,7 +43,7 @@ def upload_files_to_s3(client ,bucket , local_path , s3_object_name):
 		return 0
 
 
-def ingest_streaming_data():
+def ingest_streaming_data(s3_client):
 	consumer = KafkaConsumer(
 		'clicks_topic',
 		bootstrap_servers=['localhost:9092'],
@@ -52,12 +52,42 @@ def ingest_streaming_data():
 		value_deserializer=lambda x: json.loads(x.decode('utf-8'))
 	)
 	print("kafka consumer created, listening to clicks_topic")
+
+	batch = []
+	batch_size = 50
+	last_upload_time = time.time()
+	max_interval = 60
 	try:
 		for message in consumer:
+			batch.append(message.value)
+
+			current_time = time.time()
+			diff_time = current_time - last_upload_time
+
+			if len(batch) >= batch_size or diff_time >= max_interval:
+				if batch:
+					now = datetime.datetime.now()
+					filename = f"{now.strftime('%Y/%m/%d/%H-%M-%S')}-clickstream.json"
+
+					file_content = '\n'.join([json.dumps(record) for record in batch])
+
+					try:
+						s3_client.put_object(
+							Bucket=BUCKET_NAME,
+							Key=filename,
+							Body=file_content.encode('utf-8')
+						)
+						print(f"Uploaded {filename} to S3")
+					except Exception as e:
+						print(f"Error uploading to S3: {e}")
+					batch = []
+					last_upload_time = current_time
+
+
 			print(f"Received message: {message.value}")
 	except KeyboardInterrupt:
 		print("Stopping Kafka consumer")
-	
+
 
 if __name__ == "__main__":
 	s3_client = get_s3_client()
@@ -80,4 +110,4 @@ if __name__ == "__main__":
 				print(f"{LOCAL_DATA_PATH} is not a directory")
 		print(f"Total files uploaded: {total_uploaded}")
 
-		ingest_streaming_data()
+		ingest_streaming_data(s3_client)
