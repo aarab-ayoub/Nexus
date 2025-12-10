@@ -2,6 +2,9 @@ import os
 import boto3
 from botocore.exceptions import NoCredentialsError
 import datetime
+from kafka import KafkaConsumer
+import json
+
 
 MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "localhost:9000")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
@@ -40,6 +43,22 @@ def upload_files_to_s3(client ,bucket , local_path , s3_object_name):
 		return 0
 
 
+def ingest_streaming_data():
+	consumer = KafkaConsumer(
+		'clicks_topic',
+		bootstrap_servers=['localhost:9092'],
+		group_id='s3-ingestion-group',
+		auto_offset_reset='earliest',
+		value_deserializer=lambda x: json.loads(x.decode('utf-8'))
+	)
+	print("kafka consumer created, listening to clicks_topic")
+	try:
+		for message in consumer:
+			print(f"Received message: {message.value}")
+	except KeyboardInterrupt:
+		print("Stopping Kafka consumer")
+	
+
 if __name__ == "__main__":
 	s3_client = get_s3_client()
 	if s3_client:
@@ -61,3 +80,4 @@ if __name__ == "__main__":
 				print(f"{LOCAL_DATA_PATH} is not a directory")
 		print(f"Total files uploaded: {total_uploaded}")
 
+		ingest_streaming_data()
