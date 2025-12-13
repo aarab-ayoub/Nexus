@@ -97,7 +97,7 @@ if __name__ == "__main__":
 	
 	num_users=100
 	num_products=200
-	num_orders=1000
+	num_orders=100
 	
 	user_ids = generate_users_data(num_users)
 	product_ids =generate_products_data(num_products)
