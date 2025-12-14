@@ -13,13 +13,13 @@ def main():
         .config("spark.hadoop.fs.s3a.access.key", aws_access_key_id) \
         .config("spark.hadoop.fs.s3a.secret.key", aws_secret_access_key) \
         .config("spark.hadoop.fs.s3a.path.style.access", "true") \
-        .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false") \
-        .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
         .config("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider") \
-        .config("spark.hadoop.fs.s3a.connection.timeout", "30000") \
-        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "30000") \
-        .config("spark.hadoop.fs.s3a.attempts.maximum", "3") \
         .getOrCreate()
+        # .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false") \
+        # .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+        # .config("spark.hadoop.fs.s3a.connection.timeout", "30000") \
+        # .config("spark.hadoop.fs.s3a.connection.establish.timeout", "30000") \
+        # .config("spark.hadoop.fs.s3a.attempts.maximum", "3") \
 
 	print("connecting to minio")
 
