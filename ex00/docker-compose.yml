@@ -8,6 +8,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - network-spark
 
   # Kafka Broker Service
   kafka:
@@ -25,7 +27,9 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-  
+    networks:
+      - network-spark
+      
   postgres:
     image: postgres:13
     container_name: postgres
@@ -37,25 +41,67 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
-
-  spark:
-    image: gettyimages/spark:latest
-    container_name: spark
+    networks:
+      - network-spark
+  # spark:
+  #   image: gettyimages/spark:latest
+  #   container_name: spark
+  #   ports:
+  #     - "8080:8080"
+  #     - "7077:7077"
+  #   environment:
+  #     - SPARK_MODE=master
+  #   volumes:
+  #     - ../ex02:/app
+  
+  spark-masters:
+    image: bde2020/spark-master:3.3.0-hadoop3.3
+    container_name: spark-master
     ports:
       - "8080:8080"
       - "7077:7077"
     environment:
-      - SPARK_MODE=master
+      - INIT_DAEMON_STEP=setup_spark
     volumes:
       - ../ex02:/app
-  
+      - ./spark-logs:/opt/spark/logs
+    networks:
+      - network-spark
+
+
+  spark-workers:
+    image: bde2020/spark-worker:3.3.0-hadoop3.3
+    container_name: spark-worker-1
+    depends_on:
+      - spark-masters
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+      - "SPARK_WORKER_CORES=2"
+      - "SPARK_WORKER_MEMORY=2g"
+      - "SPARK_WORKER_PORT=8881"
+      - "SPARK_WORKER_WEBUI_PORT=8081"
+    volumes:
+      - ../ex02:/app
+    networks:
+      - network-spark
+
+
   generator:
     build: .
     container_name: generator
     depends_on:
       - kafka
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_WEBUI_PORT=8081
     volumes:
       - ./data:/app/data
+    networks:
+      - network-spark
 
   minio:
     image: minio/minio
@@ -67,3 +113,9 @@ services:
       - MINIO_ROOT_USER=minioadmin
       - MINIO_ROOT_PASSWORD=minioadmin
     command: server /data --console-address ":9001"
+    networks:
+      - network-spark
+
+networks:
+  network-spark:
+    driver: bridge

@@ -2,3 +2,5 @@ ex01/terraform.tfstate.backup
 ex01/.terraform/
 .DS_Store
 .vscode/
+ex00/postgres_data/
+ex00/spark-logs/
