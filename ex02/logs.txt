@@ -1,0 +1,491 @@
+ spark-submit --master 'local[*]' --packages org.apache.hadoop:hadoop-aws:3.2.2,org.postgresql:postgresql:42.2.23 etl_job.py
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/12/14 03:49:42 WARN Utils: Your hostname, ayoubs-MacBook-Pro.local, resolves to a loopback address: 127.0.0.1; using 192.168.1.3 instead (on interface en0)
+25/12/14 03:49:42 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+:: loading settings :: url = jar:file:/opt/miniconda3/lib/python3.13/site-packages/pyspark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /Users/ayoub/.ivy2.5.2/cache
+The jars for the packages stored in: /Users/ayoub/.ivy2.5.2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+org.postgresql#postgresql added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-dfcd3ea9-c8a3-4203-9b3d-752e8b9b6606;1.0
+        confs: [default]
+        found org.apache.hadoop#hadoop-aws;3.2.2 in central
+        found com.amazonaws#aws-java-sdk-bundle;1.11.563 in central
+        found org.postgresql#postgresql;42.2.23 in central
+        found org.checkerframework#checker-qual;3.5.0 in central
+:: resolution report :: resolve 76ms :: artifacts dl 3ms
+        :: modules in use:
+        com.amazonaws#aws-java-sdk-bundle;1.11.563 from central in [default]
+        org.apache.hadoop#hadoop-aws;3.2.2 from central in [default]
+        org.checkerframework#checker-qual;3.5.0 from central in [default]
+        org.postgresql#postgresql;42.2.23 from central in [default]
+        ---------------------------------------------------------------------
+        |                  |            modules            ||   artifacts   |
+        |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+        ---------------------------------------------------------------------
+        |      default     |   4   |   0   |   0   |   0   ||   4   |   0   |
+        ---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-dfcd3ea9-c8a3-4203-9b3d-752e8b9b6606
+        confs: [default]
+        0 artifacts copied, 4 already retrieved (0kB/3ms)
+25/12/14 03:50:12 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/12/14 03:50:13 INFO SparkContext: Running Spark version 4.0.1
+25/12/14 03:50:13 INFO SparkContext: OS info Mac OS X, 26.1, aarch64
+25/12/14 03:50:13 INFO SparkContext: Java version 17.0.17
+25/12/14 03:50:13 INFO ResourceUtils: ==============================================================
+25/12/14 03:50:13 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/12/14 03:50:13 INFO ResourceUtils: ==============================================================
+25/12/14 03:50:13 INFO SparkContext: Submitted application: ECommerceETL
+25/12/14 03:50:14 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/12/14 03:50:14 INFO ResourceProfile: Limiting resource is cpu
+25/12/14 03:50:14 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/12/14 03:50:14 INFO SecurityManager: Changing view acls to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: Changing modify acls to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: Changing view acls groups to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: Changing modify acls groups to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ayoub groups with view permissions: EMPTY; users with modify permissions: ayoub; groups with modify permissions: EMPTY; RPC SSL disabled
+25/12/14 03:50:14 INFO Utils: Successfully started service 'sparkDriver' on port 57659.
+25/12/14 03:50:14 INFO SparkEnv: Registering MapOutputTracker
+25/12/14 03:50:14 INFO SparkEnv: Registering BlockManagerMaster
+25/12/14 03:50:14 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/12/14 03:50:14 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/12/14 03:50:14 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/12/14 03:50:14 INFO DiskBlockManager: Created local directory at /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/blockmgr-c46d671f-70dc-4ac2-9d3e-44fdd128eef4
+25/12/14 03:50:14 INFO SparkEnv: Registering OutputCommitCoordinator
+25/12/14 03:50:14 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+25/12/14 03:50:14 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/12/14 03:50:14 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar at spark://192.168.1.3:57659/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar at spark://192.168.1.3:57659/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar at spark://192.168.1.3:57659/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar at spark://192.168.1.3:57659/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.apache.hadoop_hadoop-aws-3.2.2.jar
+25/12/14 03:50:14 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.postgresql_postgresql-42.2.23.jar
+25/12/14 03:50:14 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar at file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar
+25/12/14 03:50:14 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.checkerframework_checker-qual-3.5.0.jar
+25/12/14 03:50:14 INFO SecurityManager: Changing view acls to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: Changing modify acls to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: Changing view acls groups to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: Changing modify acls groups to: ayoub
+25/12/14 03:50:14 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ayoub groups with view permissions: EMPTY; users with modify permissions: ayoub; groups with modify permissions: EMPTY; RPC SSL disabled
+25/12/14 03:50:14 INFO Executor: Starting executor ID driver on host 192.168.1.3
+25/12/14 03:50:14 INFO Executor: OS info Mac OS X, 26.1, aarch64
+25/12/14 03:50:14 INFO Executor: Java version 17.0.17
+25/12/14 03:50:14 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+25/12/14 03:50:14 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@38fd9409 for default.
+25/12/14 03:50:14 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.apache.hadoop_hadoop-aws-3.2.2.jar
+25/12/14 03:50:14 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.postgresql_postgresql-42.2.23.jar
+25/12/14 03:50:14 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.checkerframework_checker-qual-3.5.0.jar
+25/12/14 03:50:14 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar
+25/12/14 03:50:14 INFO Executor: Fetching spark://192.168.1.3:57659/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO TransportClientFactory: Successfully created connection to /192.168.1.3:57659 after 8 ms (0 ms spent in bootstraps)
+25/12/14 03:50:14 INFO Utils: Fetching spark://192.168.1.3:57659/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp4198001102546343673.tmp
+25/12/14 03:50:14 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp4198001102546343673.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar
+25/12/14 03:50:14 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar to class loader default
+25/12/14 03:50:14 INFO Executor: Fetching spark://192.168.1.3:57659/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Fetching spark://192.168.1.3:57659/jars/org.checkerframework_checker-qual-3.5.0.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp7869492558039400469.tmp
+25/12/14 03:50:14 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp7869492558039400469.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.checkerframework_checker-qual-3.5.0.jar
+25/12/14 03:50:14 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.checkerframework_checker-qual-3.5.0.jar to class loader default
+25/12/14 03:50:14 INFO Executor: Fetching spark://192.168.1.3:57659/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Fetching spark://192.168.1.3:57659/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp5573087540761447806.tmp
+25/12/14 03:50:14 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp5573087540761447806.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.apache.hadoop_hadoop-aws-3.2.2.jar
+25/12/14 03:50:14 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.apache.hadoop_hadoop-aws-3.2.2.jar to class loader default
+25/12/14 03:50:14 INFO Executor: Fetching spark://192.168.1.3:57659/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680613975
+25/12/14 03:50:14 INFO Utils: Fetching spark://192.168.1.3:57659/jars/org.postgresql_postgresql-42.2.23.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp1200683325018636189.tmp
+25/12/14 03:50:14 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/fetchFileTemp1200683325018636189.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.postgresql_postgresql-42.2.23.jar
+25/12/14 03:50:14 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/userFiles-b308b9fd-1e32-498f-a53b-b6f48d9eeff2/org.postgresql_postgresql-42.2.23.jar to class loader default
+25/12/14 03:50:14 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 57662.
+25/12/14 03:50:14 INFO NettyBlockTransferService: Server created on 192.168.1.3:57662
+25/12/14 03:50:14 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/12/14 03:50:14 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 192.168.1.3, 57662, None)
+25/12/14 03:50:14 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.1.3:57662 with 434.4 MiB RAM, BlockManagerId(driver, 192.168.1.3, 57662, None)
+25/12/14 03:50:14 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 192.168.1.3, 57662, None)
+25/12/14 03:50:14 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 192.168.1.3, 57662, None)
+connecting to minio
+25/12/14 03:50:15 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+25/12/14 03:50:15 INFO SharedState: Warehouse path is 'file:/Users/ayoub/work/Nexus/ex02/spark-warehouse'.
+25/12/14 03:50:15 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+25/12/14 03:50:15 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+25/12/14 03:50:15 INFO MetricsSystemImpl: s3a-file-system metrics system started
+25/12/14 03:50:15 WARN FileSystem: Failed to initialize filesystem s3a://raw-data/2025/12/14/Users.csv: java.lang.NumberFormatException: For input string: "60s"
+25/12/14 03:50:15 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+25/12/14 03:50:15 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+25/12/14 03:50:15 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
+25/12/14 03:50:15 WARN FileStreamSink: Assume no metadata directory. Error while looking for metadata directory in the path: s3a://raw-data/2025/12/14/Users.csv.
+java.lang.NumberFormatException: For input string: "60s"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+        at java.base/java.lang.Long.parseLong(Long.java:711)
+        at java.base/java.lang.Long.parseLong(Long.java:836)
+        at org.apache.hadoop.conf.Configuration.getLong(Configuration.java:1607)
+        at org.apache.hadoop.fs.s3a.S3AUtils.longOption(S3AUtils.java:935)
+        at org.apache.hadoop.fs.s3a.S3AFileSystem.initialize(S3AFileSystem.java:297)
+        at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3615)
+        at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:172)
+        at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3716)
+        at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3667)
+        at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:557)
+        at org.apache.hadoop.fs.Path.getFileSystem(Path.java:366)
+        at org.apache.spark.sql.execution.streaming.FileStreamSink$.hasMetadata(FileStreamSink.scala:55)
+        at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:381)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource.org$apache$spark$sql$catalyst$analysis$ResolveDataSource$$loadV1BatchSource(ResolveDataSource.scala:143)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource$$anonfun$apply$1.$anonfun$applyOrElse$2(ResolveDataSource.scala:61)
+        at scala.Option.getOrElse(Option.scala:201)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource$$anonfun$apply$1.applyOrElse(ResolveDataSource.scala:61)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource$$anonfun$apply$1.applyOrElse(ResolveDataSource.scala:45)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.$anonfun$resolveOperatorsUpWithPruning$3(AnalysisHelper.scala:139)
+        at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(origin.scala:86)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.$anonfun$resolveOperatorsUpWithPruning$1(AnalysisHelper.scala:139)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.allowInvokingTransformsInAnalyzer(AnalysisHelper.scala:416)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUpWithPruning(AnalysisHelper.scala:135)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUpWithPruning$(AnalysisHelper.scala:131)
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperatorsUpWithPruning(LogicalPlan.scala:37)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUp(AnalysisHelper.scala:112)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUp$(AnalysisHelper.scala:111)
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperatorsUp(LogicalPlan.scala:37)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource.apply(ResolveDataSource.scala:45)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource.apply(ResolveDataSource.scala:43)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$execute$2(RuleExecutor.scala:242)
+        at scala.collection.LinearSeqOps.foldLeft(LinearSeq.scala:183)
+        at scala.collection.LinearSeqOps.foldLeft$(LinearSeq.scala:179)
+        at scala.collection.immutable.List.foldLeft(List.scala:79)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$execute$1(RuleExecutor.scala:239)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$execute$1$adapted(RuleExecutor.scala:231)
+        at scala.collection.immutable.List.foreach(List.scala:334)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.execute(RuleExecutor.scala:231)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.org$apache$spark$sql$catalyst$analysis$Analyzer$$executeSameContext(Analyzer.scala:340)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.$anonfun$execute$1(Analyzer.scala:336)
+        at org.apache.spark.sql.catalyst.analysis.AnalysisContext$.withNewAnalysisContext(Analyzer.scala:234)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.execute(Analyzer.scala:336)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.execute(Analyzer.scala:299)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$executeAndTrack$1(RuleExecutor.scala:201)
+        at org.apache.spark.sql.catalyst.QueryPlanningTracker$.withTracker(QueryPlanningTracker.scala:89)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.executeAndTrack(RuleExecutor.scala:201)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.resolveInFixedPoint(HybridAnalyzer.scala:190)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.$anonfun$apply$1(HybridAnalyzer.scala:76)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.withTrackedAnalyzerBridgeState(HybridAnalyzer.scala:111)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.apply(HybridAnalyzer.scala:71)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.$anonfun$executeAndCheck$1(Analyzer.scala:330)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.markInAnalyzer(AnalysisHelper.scala:423)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.executeAndCheck(Analyzer.scala:330)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$lazyAnalyzed$2(QueryExecution.scala:110)
+        at org.apache.spark.sql.catalyst.QueryPlanningTracker.measurePhase(QueryPlanningTracker.scala:148)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$executePhase$2(QueryExecution.scala:278)
+        at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:654)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$executePhase$1(QueryExecution.scala:278)
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:804)
+        at org.apache.spark.sql.execution.QueryExecution.executePhase(QueryExecution.scala:277)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$lazyAnalyzed$1(QueryExecution.scala:110)
+        at scala.util.Try$.apply(Try.scala:217)
+        at org.apache.spark.util.Utils$.doTryWithCallerStacktrace(Utils.scala:1378)
+        at org.apache.spark.util.LazyTry.tryT$lzycompute(LazyTry.scala:46)
+        at org.apache.spark.util.LazyTry.tryT(LazyTry.scala:46)
+        at org.apache.spark.util.LazyTry.get(LazyTry.scala:58)
+        at org.apache.spark.sql.execution.QueryExecution.analyzed(QueryExecution.scala:121)
+        at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:80)
+        at org.apache.spark.sql.classic.Dataset$.$anonfun$ofRows$1(Dataset.scala:115)
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:804)
+        at org.apache.spark.sql.classic.Dataset$.ofRows(Dataset.scala:113)
+        at org.apache.spark.sql.classic.DataFrameReader.load(DataFrameReader.scala:109)
+        at org.apache.spark.sql.classic.DataFrameReader.load(DataFrameReader.scala:58)
+        at org.apache.spark.sql.DataFrameReader.csv(DataFrameReader.scala:392)
+        at org.apache.spark.sql.classic.DataFrameReader.csv(DataFrameReader.scala:259)
+        at org.apache.spark.sql.classic.DataFrameReader.csv(DataFrameReader.scala:58)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+        at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+        at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+        at py4j.Gateway.invoke(Gateway.java:282)
+        at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+        at py4j.commands.CallCommand.execute(CallCommand.java:79)
+        at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+        at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+        at java.base/java.lang.Thread.run(Thread.java:840)
+25/12/14 03:50:15 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+25/12/14 03:50:15 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+25/12/14 03:50:15 INFO MetricsSystemImpl: s3a-file-system metrics system started
+25/12/14 03:50:15 WARN FileSystem: Failed to initialize filesystem s3a://raw-data/2025/12/14/Users.csv: java.lang.NumberFormatException: For input string: "60s"
+25/12/14 03:50:15 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+25/12/14 03:50:15 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+25/12/14 03:50:15 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
+For input string: "60s"
+25/12/14 03:50:15 INFO SparkContext: SparkContext is stopping with exitCode 0 from stop at NativeMethodAccessorImpl.java:0.
+25/12/14 03:50:15 INFO SparkUI: Stopped Spark web UI at http://192.168.1.3:4040
+25/12/14 03:50:15 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+25/12/14 03:50:15 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+25/12/14 03:50:15 INFO MemoryStore: MemoryStore cleared
+25/12/14 03:50:15 INFO BlockManager: BlockManager stopped
+25/12/14 03:50:15 INFO BlockManagerMaster: BlockManagerMaster stopped
+25/12/14 03:50:15 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+25/12/14 03:50:15 INFO SparkContext: Successfully stopped SparkContext
+25/12/14 03:50:16 INFO ShutdownHookManager: Shutdown hook called
+25/12/14 03:50:16 INFO ShutdownHookManager: Deleting directory /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-684a2064-c274-4313-a6ea-8a021e188c1d
+25/12/14 03:50:16 INFO ShutdownHookManager: Deleting directory /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874
+25/12/14 03:50:16 INFO ShutdownHookManager: Deleting directory /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-39e5effd-bc82-4d6b-9519-8f56ed325874/pyspark-b640a9bb-bde2-490e-8ca0-02eaa24e0e0c
+
+
+
+alternative result:
+ spark-submit --master 'local[*]' --packages org.apache.hadoop:hadoop-aws:3.3.4,org.postgresql:postgresql:42.2.23 etl_job.py
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/12/14 03:50:29 WARN Utils: Your hostname, ayoubs-MacBook-Pro.local, resolves to a loopback address: 127.0.0.1; using 192.168.1.3 instead (on interface en0)
+25/12/14 03:50:29 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+:: loading settings :: url = jar:file:/opt/miniconda3/lib/python3.13/site-packages/pyspark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /Users/ayoub/.ivy2.5.2/cache
+The jars for the packages stored in: /Users/ayoub/.ivy2.5.2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+org.postgresql#postgresql added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-757a6080-57d6-44ca-b178-f5c25ce6f75b;1.0
+        confs: [default]
+        found org.apache.hadoop#hadoop-aws;3.3.4 in central
+        found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+        found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+        found org.postgresql#postgresql;42.2.23 in central
+        found org.checkerframework#checker-qual;3.5.0 in central
+downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar ...
+        [SUCCESSFUL ] org.apache.hadoop#hadoop-aws;3.3.4!hadoop-aws.jar (814ms)
+downloading https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar ...
+        [SUCCESSFUL ] com.amazonaws#aws-java-sdk-bundle;1.12.262!aws-java-sdk-bundle.jar (187884ms)
+downloading https://repo1.maven.org/maven2/org/wildfly/openssl/wildfly-openssl/1.0.7.Final/wildfly-openssl-1.0.7.Final.jar ...
+        [SUCCESSFUL ] org.wildfly.openssl#wildfly-openssl;1.0.7.Final!wildfly-openssl.jar (401ms)
+:: resolution report :: resolve 4894ms :: artifacts dl 189107ms
+        :: modules in use:
+        com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+        org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+        org.checkerframework#checker-qual;3.5.0 from central in [default]
+        org.postgresql#postgresql;42.2.23 from central in [default]
+        org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+        ---------------------------------------------------------------------
+        |                  |            modules            ||   artifacts   |
+        |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+        ---------------------------------------------------------------------
+        |      default     |   5   |   3   |   3   |   0   ||   5   |   3   |
+        ---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-757a6080-57d6-44ca-b178-f5c25ce6f75b
+        confs: [default]
+        3 artifacts copied, 2 already retrieved (275421kB/163ms)
+25/12/14 03:54:13 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/12/14 03:54:15 INFO SparkContext: Running Spark version 4.0.1
+25/12/14 03:54:15 INFO SparkContext: OS info Mac OS X, 26.1, aarch64
+25/12/14 03:54:15 INFO SparkContext: Java version 17.0.17
+25/12/14 03:54:15 INFO ResourceUtils: ==============================================================
+25/12/14 03:54:15 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/12/14 03:54:15 INFO ResourceUtils: ==============================================================
+25/12/14 03:54:15 INFO SparkContext: Submitted application: ECommerceETL
+25/12/14 03:54:15 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/12/14 03:54:15 INFO ResourceProfile: Limiting resource is cpu
+25/12/14 03:54:15 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/12/14 03:54:15 INFO SecurityManager: Changing view acls to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: Changing modify acls to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: Changing view acls groups to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: Changing modify acls groups to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ayoub groups with view permissions: EMPTY; users with modify permissions: ayoub; groups with modify permissions: EMPTY; RPC SSL disabled
+25/12/14 03:54:15 INFO Utils: Successfully started service 'sparkDriver' on port 57721.
+25/12/14 03:54:15 INFO SparkEnv: Registering MapOutputTracker
+25/12/14 03:54:15 INFO SparkEnv: Registering BlockManagerMaster
+25/12/14 03:54:15 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/12/14 03:54:15 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/12/14 03:54:15 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/12/14 03:54:15 INFO DiskBlockManager: Created local directory at /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/blockmgr-3debc5a0-725a-4be2-8e80-adfa8ecf35c4
+25/12/14 03:54:15 INFO SparkEnv: Registering OutputCommitCoordinator
+25/12/14 03:54:15 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+25/12/14 03:54:15 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/12/14 03:54:15 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://192.168.1.3:57721/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar at spark://192.168.1.3:57721/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://192.168.1.3:57721/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://192.168.1.3:57721/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO SparkContext: Added JAR file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar at spark://192.168.1.3:57721/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.apache.hadoop_hadoop-aws-3.3.4.jar
+25/12/14 03:54:15 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.postgresql_postgresql-42.2.23.jar
+25/12/14 03:54:15 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar
+25/12/14 03:54:15 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar
+25/12/14 03:54:15 INFO SparkContext: Added file file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar at file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Copying /Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.checkerframework_checker-qual-3.5.0.jar
+25/12/14 03:54:15 INFO SecurityManager: Changing view acls to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: Changing modify acls to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: Changing view acls groups to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: Changing modify acls groups to: ayoub
+25/12/14 03:54:15 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ayoub groups with view permissions: EMPTY; users with modify permissions: ayoub; groups with modify permissions: EMPTY; RPC SSL disabled
+25/12/14 03:54:15 INFO Executor: Starting executor ID driver on host 192.168.1.3
+25/12/14 03:54:15 INFO Executor: OS info Mac OS X, 26.1, aarch64
+25/12/14 03:54:15 INFO Executor: Java version 17.0.17
+25/12/14 03:54:15 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+25/12/14 03:54:15 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@58f69b44 for default.
+25/12/14 03:54:15 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.apache.hadoop_hadoop-aws-3.3.4.jar
+25/12/14 03:54:15 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar
+25/12/14 03:54:15 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.checkerframework_checker-qual-3.5.0.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.checkerframework_checker-qual-3.5.0.jar
+25/12/14 03:54:15 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar
+25/12/14 03:54:15 INFO Executor: Fetching file:///Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: /Users/ayoub/.ivy2.5.2/jars/org.postgresql_postgresql-42.2.23.jar has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.postgresql_postgresql-42.2.23.jar
+25/12/14 03:54:15 INFO Executor: Fetching spark://192.168.1.3:57721/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO TransportClientFactory: Successfully created connection to /192.168.1.3:57721 after 8 ms (0 ms spent in bootstraps)
+25/12/14 03:54:15 INFO Utils: Fetching spark://192.168.1.3:57721/jars/org.checkerframework_checker-qual-3.5.0.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp1338858346215519414.tmp
+25/12/14 03:54:15 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp1338858346215519414.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.checkerframework_checker-qual-3.5.0.jar
+25/12/14 03:54:15 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.checkerframework_checker-qual-3.5.0.jar to class loader default
+25/12/14 03:54:15 INFO Executor: Fetching spark://192.168.1.3:57721/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Fetching spark://192.168.1.3:57721/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp8860777831710180202.tmp
+25/12/14 03:54:15 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp8860777831710180202.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar
+25/12/14 03:54:15 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to class loader default
+25/12/14 03:54:15 INFO Executor: Fetching spark://192.168.1.3:57721/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Fetching spark://192.168.1.3:57721/jars/org.postgresql_postgresql-42.2.23.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp14438639837873830177.tmp
+25/12/14 03:54:15 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp14438639837873830177.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.postgresql_postgresql-42.2.23.jar
+25/12/14 03:54:15 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.postgresql_postgresql-42.2.23.jar to class loader default
+25/12/14 03:54:15 INFO Executor: Fetching spark://192.168.1.3:57721/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Fetching spark://192.168.1.3:57721/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp5918595791382573800.tmp
+25/12/14 03:54:15 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp5918595791382573800.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.apache.hadoop_hadoop-aws-3.3.4.jar
+25/12/14 03:54:15 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.apache.hadoop_hadoop-aws-3.3.4.jar to class loader default
+25/12/14 03:54:15 INFO Executor: Fetching spark://192.168.1.3:57721/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1765680855000
+25/12/14 03:54:15 INFO Utils: Fetching spark://192.168.1.3:57721/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp4354141919631279933.tmp
+25/12/14 03:54:15 INFO Utils: /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/fetchFileTemp4354141919631279933.tmp has been previously copied to /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar
+25/12/14 03:54:15 INFO Executor: Adding file:/private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/userFiles-459ff277-9d78-4cfe-a405-7b5f2be453a5/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to class loader default
+25/12/14 03:54:15 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 57724.
+25/12/14 03:54:15 INFO NettyBlockTransferService: Server created on 192.168.1.3:57724
+25/12/14 03:54:15 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/12/14 03:54:15 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 192.168.1.3, 57724, None)
+25/12/14 03:54:15 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.1.3:57724 with 434.4 MiB RAM, BlockManagerId(driver, 192.168.1.3, 57724, None)
+25/12/14 03:54:15 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 192.168.1.3, 57724, None)
+25/12/14 03:54:15 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 192.168.1.3, 57724, None)
+connecting to minio
+25/12/14 03:54:16 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+25/12/14 03:54:16 INFO SharedState: Warehouse path is 'file:/Users/ayoub/work/Nexus/ex02/spark-warehouse'.
+25/12/14 03:54:16 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+25/12/14 03:54:16 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+25/12/14 03:54:16 INFO MetricsSystemImpl: s3a-file-system metrics system started
+25/12/14 03:54:16 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+25/12/14 03:54:16 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+25/12/14 03:54:16 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
+25/12/14 03:54:16 WARN FileSystem: Failed to initialize filesystem s3a://raw-data/2025/12/14/Users.csv: java.lang.NumberFormatException: For input string: "60s"
+25/12/14 03:54:16 WARN FileStreamSink: Assume no metadata directory. Error while looking for metadata directory in the path: s3a://raw-data/2025/12/14/Users.csv.
+java.lang.NumberFormatException: For input string: "60s"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+        at java.base/java.lang.Long.parseLong(Long.java:711)
+        at java.base/java.lang.Long.parseLong(Long.java:836)
+        at org.apache.hadoop.conf.Configuration.getLong(Configuration.java:1607)
+        at org.apache.hadoop.fs.s3a.S3AUtils.longOption(S3AUtils.java:1024)
+        at org.apache.hadoop.fs.s3a.S3AFileSystem.initThreadPools(S3AFileSystem.java:719)
+        at org.apache.hadoop.fs.s3a.S3AFileSystem.initialize(S3AFileSystem.java:498)
+        at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3615)
+        at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:172)
+        at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3716)
+        at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3667)
+        at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:557)
+        at org.apache.hadoop.fs.Path.getFileSystem(Path.java:366)
+        at org.apache.spark.sql.execution.streaming.FileStreamSink$.hasMetadata(FileStreamSink.scala:55)
+        at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:381)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource.org$apache$spark$sql$catalyst$analysis$ResolveDataSource$$loadV1BatchSource(ResolveDataSource.scala:143)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource$$anonfun$apply$1.$anonfun$applyOrElse$2(ResolveDataSource.scala:61)
+        at scala.Option.getOrElse(Option.scala:201)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource$$anonfun$apply$1.applyOrElse(ResolveDataSource.scala:61)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource$$anonfun$apply$1.applyOrElse(ResolveDataSource.scala:45)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.$anonfun$resolveOperatorsUpWithPruning$3(AnalysisHelper.scala:139)
+        at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(origin.scala:86)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.$anonfun$resolveOperatorsUpWithPruning$1(AnalysisHelper.scala:139)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.allowInvokingTransformsInAnalyzer(AnalysisHelper.scala:416)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUpWithPruning(AnalysisHelper.scala:135)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUpWithPruning$(AnalysisHelper.scala:131)
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperatorsUpWithPruning(LogicalPlan.scala:37)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUp(AnalysisHelper.scala:112)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.resolveOperatorsUp$(AnalysisHelper.scala:111)
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperatorsUp(LogicalPlan.scala:37)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource.apply(ResolveDataSource.scala:45)
+        at org.apache.spark.sql.catalyst.analysis.ResolveDataSource.apply(ResolveDataSource.scala:43)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$execute$2(RuleExecutor.scala:242)
+        at scala.collection.LinearSeqOps.foldLeft(LinearSeq.scala:183)
+        at scala.collection.LinearSeqOps.foldLeft$(LinearSeq.scala:179)
+        at scala.collection.immutable.List.foldLeft(List.scala:79)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$execute$1(RuleExecutor.scala:239)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$execute$1$adapted(RuleExecutor.scala:231)
+        at scala.collection.immutable.List.foreach(List.scala:334)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.execute(RuleExecutor.scala:231)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.org$apache$spark$sql$catalyst$analysis$Analyzer$$executeSameContext(Analyzer.scala:340)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.$anonfun$execute$1(Analyzer.scala:336)
+        at org.apache.spark.sql.catalyst.analysis.AnalysisContext$.withNewAnalysisContext(Analyzer.scala:234)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.execute(Analyzer.scala:336)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.execute(Analyzer.scala:299)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.$anonfun$executeAndTrack$1(RuleExecutor.scala:201)
+        at org.apache.spark.sql.catalyst.QueryPlanningTracker$.withTracker(QueryPlanningTracker.scala:89)
+        at org.apache.spark.sql.catalyst.rules.RuleExecutor.executeAndTrack(RuleExecutor.scala:201)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.resolveInFixedPoint(HybridAnalyzer.scala:190)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.$anonfun$apply$1(HybridAnalyzer.scala:76)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.withTrackedAnalyzerBridgeState(HybridAnalyzer.scala:111)
+        at org.apache.spark.sql.catalyst.analysis.resolver.HybridAnalyzer.apply(HybridAnalyzer.scala:71)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.$anonfun$executeAndCheck$1(Analyzer.scala:330)
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.markInAnalyzer(AnalysisHelper.scala:423)
+        at org.apache.spark.sql.catalyst.analysis.Analyzer.executeAndCheck(Analyzer.scala:330)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$lazyAnalyzed$2(QueryExecution.scala:110)
+        at org.apache.spark.sql.catalyst.QueryPlanningTracker.measurePhase(QueryPlanningTracker.scala:148)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$executePhase$2(QueryExecution.scala:278)
+        at org.apache.spark.sql.execution.QueryExecution$.withInternalError(QueryExecution.scala:654)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$executePhase$1(QueryExecution.scala:278)
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:804)
+        at org.apache.spark.sql.execution.QueryExecution.executePhase(QueryExecution.scala:277)
+        at org.apache.spark.sql.execution.QueryExecution.$anonfun$lazyAnalyzed$1(QueryExecution.scala:110)
+        at scala.util.Try$.apply(Try.scala:217)
+        at org.apache.spark.util.Utils$.doTryWithCallerStacktrace(Utils.scala:1378)
+        at org.apache.spark.util.LazyTry.tryT$lzycompute(LazyTry.scala:46)
+        at org.apache.spark.util.LazyTry.tryT(LazyTry.scala:46)
+        at org.apache.spark.util.LazyTry.get(LazyTry.scala:58)
+        at org.apache.spark.sql.execution.QueryExecution.analyzed(QueryExecution.scala:121)
+        at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:80)
+        at org.apache.spark.sql.classic.Dataset$.$anonfun$ofRows$1(Dataset.scala:115)
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:804)
+        at org.apache.spark.sql.classic.Dataset$.ofRows(Dataset.scala:113)
+        at org.apache.spark.sql.classic.DataFrameReader.load(DataFrameReader.scala:109)
+        at org.apache.spark.sql.classic.DataFrameReader.load(DataFrameReader.scala:58)
+        at org.apache.spark.sql.DataFrameReader.csv(DataFrameReader.scala:392)
+        at org.apache.spark.sql.classic.DataFrameReader.csv(DataFrameReader.scala:259)
+        at org.apache.spark.sql.classic.DataFrameReader.csv(DataFrameReader.scala:58)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+        at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+        at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+        at py4j.Gateway.invoke(Gateway.java:282)
+        at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+        at py4j.commands.CallCommand.execute(CallCommand.java:79)
+        at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+        at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+        at java.base/java.lang.Thread.run(Thread.java:840)
+25/12/14 03:54:16 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+25/12/14 03:54:16 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+25/12/14 03:54:16 INFO MetricsSystemImpl: s3a-file-system metrics system started
+25/12/14 03:54:16 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+25/12/14 03:54:16 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+25/12/14 03:54:16 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
+25/12/14 03:54:16 WARN FileSystem: Failed to initialize filesystem s3a://raw-data/2025/12/14/Users.csv: java.lang.NumberFormatException: For input string: "60s"
+For input string: "60s"
+25/12/14 03:54:16 INFO SparkContext: SparkContext is stopping with exitCode 0 from stop at NativeMethodAccessorImpl.java:0.
+25/12/14 03:54:16 INFO SparkUI: Stopped Spark web UI at http://192.168.1.3:4040
+25/12/14 03:54:16 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+25/12/14 03:54:16 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+25/12/14 03:54:16 INFO MemoryStore: MemoryStore cleared
+25/12/14 03:54:16 INFO BlockManager: BlockManager stopped
+25/12/14 03:54:16 INFO BlockManagerMaster: BlockManagerMaster stopped
+25/12/14 03:54:16 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+25/12/14 03:54:16 INFO SparkContext: Successfully stopped SparkContext
+25/12/14 03:54:16 INFO ShutdownHookManager: Shutdown hook called
+25/12/14 03:54:16 INFO ShutdownHookManager: Deleting directory /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-5a42d439-1db1-43f7-967c-a03dda5843a3
+25/12/14 03:54:16 INFO ShutdownHookManager: Deleting directory /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6
+25/12/14 03:54:16 INFO ShutdownHookManager: Deleting directory /private/var/folders/93/271sd8y92c5clnmhjk4rpmy00000gn/T/spark-43c631ee-bb43-478c-8371-d99b31c30ef6/pyspark-84260a19-0951-4ee0-92a1-43cd7f32b3f7
+(base) ayoub@ayoubs-MacBook-Pro Nexus/ex02 (main) » 
