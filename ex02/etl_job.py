@@ -3,6 +3,13 @@ import pyspark.sql.functions as F
 
 def main():
 
+	postgres_url = "jdbc:postgresql://postgres:5432/ecommerce"
+	postgres_properties = {
+		"user": "admin",
+		"password": "admin",
+		"driver": "org.postgresql.Driver"
+	}
+
 	aws_access_key_id = "minioadmin"
 	aws_secret_access_key = "minioadmin"
 	minio_endpoint = "http://minio:9000"
@@ -23,7 +30,7 @@ def main():
 
 	print("connecting to minio")
 
-	processing_date_str = "2025/12/14"
+	processing_date_str = "2025/12/15"
 	base_s3_path = f"s3a://raw-data/{processing_date_str}"
 
 	try :
@@ -31,12 +38,45 @@ def main():
 		products_df = spark.read.csv(f'{base_s3_path}/Products.csv', header=True, inferSchema=True)
 		orders_df = spark.read.csv(f'{base_s3_path}/Orders.csv', header=True, inferSchema=True)
 
-		print("reading the data ")
+		print("cleaning it ...")
 
-		users_df.show(5)
-		products_df.show(5)
-		orders_df.show(5)
-	
+		users_df.printSchema()
+		products_df.printSchema()
+		orders_df.printSchema()
+
+		users_df=users_df.dropna()
+		users_df = users_df.withColumnRenamed("user id", "user_id")\
+			.withColumn("signup_date" , F.to_timestamp("signup_date"))
+		
+		#products turn jaja
+		products_df=products_df.dropna()
+		products_df=products_df.withColumnRenamed("product id" , "product_id")
+		
+		#orders turn jaja
+		orders_df=orders_df.dropna()
+		orders_df=orders_df.withColumnRenamed("order id" ,"order_id")\
+			.withColumnRenamed("user id" , "user_id")\
+			.withColumnRenamed("product id" , "product_id")
+
+		# print(users_df.head())
+		# print(products_df.head())
+		# print(orders_df.head())
+
+		#joining them into one table 
+
+		result = orders_df.join(users_df , on="user_id" , how="inner")
+		final_result = result.join(products_df , on="product_id" , how="inner")
+
+		# final_result.printSchema()
+		# final_result.show(5)
+
+		final_result.write\
+			.mode("overwrite")\
+			.jdbc(url=postgres_url, table="fact_orders", properties=postgres_properties)
+		
+		print("loaded succesfuly")
+
+		
 	except Exception as e:
 		print(e)
 	
