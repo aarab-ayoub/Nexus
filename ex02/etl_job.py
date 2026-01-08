@@ -1,8 +1,8 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType
-import snowflake.connector
-from snowflake.connector.pandas_tools import write_pandas
+# import snowflake.connector
+# from snowflake.connector.pandas_tools import write_pandas
 
 
 def connection_to_postgres():
@@ -56,7 +56,7 @@ def spark_connection():
 
 def batch_ETL(spark, postgres_url, postgres_properties):
 	
-	processing_date_str = "2026/01/07"
+	processing_date_str = "2026/01/09"
 	base_s3_path = f"s3a://raw-data/{processing_date_str}"
 		
 	users_df = spark.read.csv(f'{base_s3_path}/Users.csv', header=True, inferSchema=True)
@@ -106,11 +106,11 @@ def batch_ETL(spark, postgres_url, postgres_properties):
 def stream_ETL(spark, postgres_url, postgres_properties):
 	
 	click_stream_schema = StructType([
-		StructField("event_id", StringType()),
-		StructField("user_id", StringType()),
-		StructField("url", StringType()),
-		StructField("event_timestamp", TimestampType()),
-		StructField("action_url", StringType())
+		StructField("eventid", StringType(), True),
+		StructField("userid", StringType(), True),
+		StructField("url", StringType(), True),
+		StructField("timestamp", StringType(), True),
+		StructField("action", StringType(), True)
 	])
 
 	kafka_df = spark.readStream \
@@ -124,14 +124,32 @@ def stream_ETL(spark, postgres_url, postgres_properties):
 	#1st line mean cast the value to string
 	#2nd line mean parse the json string using the defined schema
 	#3rd line mean select all the fields from the parsed json
-	json_df = kafka_df.selectExpr("CAST(value AS STRING) as json_value") 
-	print(json_df)
-	json_df = json_df.select(F.from_json("json_value", click_stream_schema).alias("data"))
-	json_df = json_df.select("data.*")
-
+	json_df = kafka_df.selectExpr("CAST(value AS STRING) as json_value") \
+		.select(F.from_json("json_value", click_stream_schema).alias("data")) \
+		.select("data.*")
+	
 	click_df = json_df.withColumn("event_timestamp", F.to_timestamp("event_timestamp"))
 
-
+	page_views = click_df\
+		.withwatermark("event_timestamp", "1 minutes")\
+		.groupBy(
+			F.window("event_timestamp", "1 minute"),
+			"action"
+		)\
+		.count()\
+		.withColumnRenamed("count", "action_count")
+	
+	query = page_views.writeStream \
+        .outputMode("update") \
+        .foreachBatch(lambda df, epoch_id: df.write
+            .mode("append")
+            .jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
+        ) \
+        .trigger(processingTime='1 minute') \
+        .start()
+	
+	print("Streaming query has been started.")
+	query.awaitTermination()
 	
 def main():
 
