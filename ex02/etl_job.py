@@ -1,5 +1,9 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+from pyspark.sql.types import StructType, StructField, StringType, TimestampType
+import snowflake.connector
+from snowflake.connector.pandas_tools import write_pandas
+
 
 def connection_to_postgres():
 	postgres_url = "jdbc:postgresql://postgres:5432/ecommerce"
@@ -9,6 +13,26 @@ def connection_to_postgres():
 		"driver": "org.postgresql.Driver"
 	}
 	return postgres_url, postgres_properties
+
+def connection_to_Bigquery():
+	bigquery_url = "jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=your_project_id;DatasetId=your_dataset_id;"
+	bigquery_properties = {
+		"user": "your_username",
+		"password": "your_password",
+		"driver": "com.simba.googlebigquery.jdbc.Driver"
+	}
+	return bigquery_url, bigquery_properties
+
+def connection_to_snowflake():
+	cnx = snowflake.connector.connect(
+		user='your_username',
+		password='your_password',
+		account='your_account',
+		warehouse='your_warehouse',
+		database='your_database',
+		schema='your_schema'
+	)
+	return cnx
 
 def spark_connection():
 	aws_access_key_id = "minioadmin"
@@ -32,7 +56,7 @@ def spark_connection():
 
 def batch_ETL(spark, postgres_url, postgres_properties):
 	
-	processing_date_str = "2025/12/19"
+	processing_date_str = "2026/01/07"
 	base_s3_path = f"s3a://raw-data/{processing_date_str}"
 		
 	users_df = spark.read.csv(f'{base_s3_path}/Users.csv', header=True, inferSchema=True)
@@ -75,7 +99,38 @@ def batch_ETL(spark, postgres_url, postgres_properties):
 		.mode("overwrite")\
 		.jdbc(url=postgres_url, table="fact_orders", properties=postgres_properties)
 
+
 	print("loaded succesfuly")
+	pass
+
+def stream_ETL(spark, postgres_url, postgres_properties):
+	
+	click_stream_schema = StructType([
+		StructField("event_id", StringType()),
+		StructField("user_id", StringType()),
+		StructField("url", StringType()),
+		StructField("event_timestamp", TimestampType()),
+		StructField("action_url", StringType())
+	])
+
+	kafka_df = spark.readStream \
+		.format("kafka") \
+		.option("kafka.bootstrap.servers", "kafka:9092") \
+		.option("subscribe", "click_topics") \
+		.option("startingOffsets", "earliest") \
+		.load()
+	
+	# Extract the JSON value from the Kafka message and parse it
+	#1st line mean cast the value to string
+	#2nd line mean parse the json string using the defined schema
+	#3rd line mean select all the fields from the parsed json
+	json_df = kafka_df.selectExpr("CAST(value AS STRING) as json_value") 
+	print(json_df)
+	json_df = json_df.select(F.from_json("json_value", click_stream_schema).alias("data"))
+	json_df = json_df.select("data.*")
+
+	click_df = json_df.withColumn("event_timestamp", F.to_timestamp("event_timestamp"))
+
 
 	
 def main():
@@ -84,14 +139,12 @@ def main():
 	postgres_url, postgres_properties = connection_to_postgres()
 
 	print("connecting to minio")
-
-
 	try :
-		batch_ETL(spark, postgres_url, postgres_properties)
 
+		batch_ETL(spark, postgres_url, postgres_properties)
+		stream_ETL(spark, postgres_url, postgres_properties)
 	except Exception as e:
 		print(e)
-	
 	finally:
 		spark.stop()
 
