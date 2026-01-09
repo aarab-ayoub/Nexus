@@ -109,14 +109,19 @@ def stream_ETL(spark, postgres_url, postgres_properties):
 		StructField("eventid", StringType(), True),
 		StructField("userid", StringType(), True),
 		StructField("url", StringType(), True),
-		StructField("timestamp", StringType(), True),
+		StructField("timestamp", TimestampType(), True),
 		StructField("action", StringType(), True)
 	])
 
+	#1st line mean read the stream from kafka topic
+	#2nd line mean set the kafka bootstrap server address
+	#3rd line mean subscribe to the topic named click_topic
+	#4th line mean set the starting offsets to earliest
+	#5th line mean load the stream
 	kafka_df = spark.readStream \
 		.format("kafka") \
-		.option("kafka.bootstrap.servers", "kafka:9092") \
-		.option("subscribe", "click_topics") \
+		.option("kafka.bootstrap.servers", "kafka:29092") \
+		.option("subscribe", "clicks_topic") \
 		.option("startingOffsets", "earliest") \
 		.load()
 	
@@ -128,25 +133,32 @@ def stream_ETL(spark, postgres_url, postgres_properties):
 		.select(F.from_json("json_value", click_stream_schema).alias("data")) \
 		.select("data.*")
 	
-	click_df = json_df.withColumn("event_timestamp", F.to_timestamp("event_timestamp"))
+	# Ensure we have an event_timestamp column of TimestampType
+	click_df = json_df.withColumnRenamed("timestamp", "event_timestamp")
 
 	page_views = click_df\
-		.withwatermark("event_timestamp", "1 minutes")\
+		.withWatermark("event_timestamp", "1 minute")\
 		.groupBy(
 			F.window("event_timestamp", "1 minute"),
 			"action"
 		)\
 		.count()\
 		.withColumnRenamed("count", "action_count")
-	
-	query = page_views.writeStream \
-        .outputMode("update") \
-        .foreachBatch(lambda df, epoch_id: df.write
-            .mode("append")
-            .jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
-        ) \
-        .trigger(processingTime='1 minute') \
-        .start()
+
+	# Flatten the window struct (start,end) into separate timestamp columns for JDBC
+	page_views_flat = page_views.withColumn("window_start", F.col("window.start"))\
+		.withColumn("window_end", F.col("window.end"))\
+		.drop("window")
+
+	# use a top-level function for foreachBatch to avoid serialization issues
+	def write_batch(df, epoch_id):
+		df.write.mode("append").jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
+
+	query = page_views_flat.writeStream \
+	    .outputMode("update") \
+	    .foreachBatch(write_batch) \
+	    .trigger(processingTime='1 minute') \
+	    .start()
 	
 	print("Streaming query has been started.")
 	query.awaitTermination()
