@@ -56,7 +56,7 @@ def spark_connection():
 
 def batch_ETL(spark, postgres_url, postgres_properties):
 	
-	processing_date_str = "2026/01/09"
+	processing_date_str = "2026/01/14"
 	base_s3_path = f"s3a://raw-data/{processing_date_str}"
 		
 	users_df = spark.read.csv(f'{base_s3_path}/Users.csv', header=True, inferSchema=True)
