@@ -3,7 +3,20 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType
 # import snowflake.connector
 # from snowflake.connector.pandas_tools import write_pandas
+import os
 
+# Securely load credentials from environment variables (set in docker-compose.yml)
+# Never hardcode credentials - they should be injected at runtime
+USER = os.getenv("SNOWFLAKE_USER")
+PASSWORD = os.getenv("SNOWFLAKE_PASSWORD")
+ACCOUNT = os.getenv("SNOWFLAKE_ACCOUNT")
+WAREHOUSE = os.getenv("SNOWFLAKE_WAREHOUSE")
+DATABASE = os.getenv("SNOWFLAKE_DATABASE")
+SCHEMA = os.getenv("SNOWFLAKE_SCHEMA")
+
+# Validate that all required credentials are present
+if not all([USER, PASSWORD, ACCOUNT, WAREHOUSE, DATABASE, SCHEMA]):
+    raise ValueError("Missing required Snowflake environment variables. Check docker-compose.yml")
 
 def connection_to_postgres():
 	postgres_url = "jdbc:postgresql://postgres:5432/ecommerce"
@@ -14,25 +27,17 @@ def connection_to_postgres():
 	}
 	return postgres_url, postgres_properties
 
-def connection_to_Bigquery():
-	bigquery_url = "jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=your_project_id;DatasetId=your_dataset_id;"
-	bigquery_properties = {
-		"user": "your_username",
-		"password": "your_password",
-		"driver": "com.simba.googlebigquery.jdbc.Driver"
-	}
-	return bigquery_url, bigquery_properties
+# def connection_to_Bigquery():
+# 	bigquery_url = "jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=your_project_id;DatasetId=your_dataset_id;"
+# 	bigquery_properties = {
+# 		"user": "your_username",
+# 		"password": "your_password",
+# 		"driver": "com.simba.googlebigquery.jdbc.Driver"
+# 	}
+# 	return bigquery_url, bigquery_properties
 
-def connection_to_snowflake():
-	cnx = snowflake.connector.connect(
-		user='your_username',
-		password='your_password',
-		account='your_account',
-		warehouse='your_warehouse',
-		database='your_database',
-		schema='your_schema'
-	)
-	return cnx
+# Note: Snowflake connection is now handled via Spark connector in batch_ETL
+# No need for separate Python connector unless doing pandas operations
 
 def spark_connection():
 	aws_access_key_id = "minioadmin"
@@ -56,7 +61,7 @@ def spark_connection():
 
 def batch_ETL(spark, postgres_url, postgres_properties):
 	
-	processing_date_str = "2026/01/14"
+	processing_date_str = "2026/01/17"
 	base_s3_path = f"s3a://raw-data/{processing_date_str}"
 		
 	users_df = spark.read.csv(f'{base_s3_path}/Users.csv', header=True, inferSchema=True)
@@ -95,10 +100,30 @@ def batch_ETL(spark, postgres_url, postgres_properties):
 	# final_result.printSchema()
 	# final_result.show(5)
 
-	final_result.write\
-		.mode("overwrite")\
+	final_result.write \
+		.mode("overwrite") \
 		.jdbc(url=postgres_url, table="fact_orders", properties=postgres_properties)
 
+	# write to Snowflake
+	sf_options = {
+	    "sfURL": f"{ACCOUNT}.snowflakecomputing.com",
+	    "sfUser": USER,
+	    "sfPassword": PASSWORD,
+	    "sfDatabase": DATABASE,
+	    "sfSchema": SCHEMA,
+	    "sfWarehouse": WAREHOUSE
+	}
+
+	# select/align columns to match Snowflake table schema if needed
+	to_sf = final_result.select(
+	    "order_id", "user_id", "product_id", "name","email", "signup_date","category", "price"
+	)
+
+	to_sf.write \
+	    .format("net.snowflake.spark.snowflake") \
+	    .options(**sf_options, dbtable="fact_orders") \
+	    .mode("overwrite") \
+	    .save()
 
 	print("loaded succesfuly")
 	pass
