@@ -1,11 +1,27 @@
-/spark/bin/spark-submit   --master spark://spark-master:7077   --packages org.apache.hadoop:hadoop-aws:3.2.2,org.postgresql:postgresql:42.2.23,com.google.guava:guava:23.0   --conf spark.executor.extraClassPath=/spark/jars/*   --conf spark.driver.extraClassPath=/spark/jars/*   /app/etl_job.py
+/spark/bin/spark-submit \
+>   --master spark://spark-master:7077 \
+>   --packages \
+> org.apache.hadoop:hadoop-aws:3.2.2,\
+> org.postgresql:postgresql:42.2.23,\
+> com.google.guava:guava:23.0,\
+> org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0,\
+> org.apache.kafka:kafka-clients:3.2.0,\
+> net.snowflake:spark-snowflake_2.12:2.13.0-spark_3.3,\
+> net.snowflake:snowflake-jdbc:3.13.23 \
+>   --conf spark.executor.extraClassPath=/spark/jars/* \
+>   --conf spark.driver.extraClassPath=/spark/jars/* \
+>   /app/etl_job.py
 :: loading settings :: url = jar:file:/spark/jars/ivy-2.5.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
 Ivy Default Cache set to: /root/.ivy2/cache
 The jars for the packages stored in: /root/.ivy2/jars
 org.apache.hadoop#hadoop-aws added as a dependency
 org.postgresql#postgresql added as a dependency
 com.google.guava#guava added as a dependency
-:: resolving dependencies :: org.apache.spark#spark-submit-parent-9c28a1a5-98a3-48fe-9f11-3c5ef8331b03;1.0
+org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
+org.apache.kafka#kafka-clients added as a dependency
+net.snowflake#spark-snowflake_2.12 added as a dependency
+net.snowflake#snowflake-jdbc added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-ab888077-fa73-4c08-a37b-f18371177073;1.0
         confs: [default]
         found org.apache.hadoop#hadoop-aws;3.2.2 in central
         found com.amazonaws#aws-java-sdk-bundle;1.11.563 in central
@@ -16,138 +32,73 @@ com.google.guava#guava added as a dependency
         found com.google.errorprone#error_prone_annotations;2.0.18 in central
         found com.google.j2objc#j2objc-annotations;1.1 in central
         found org.codehaus.mojo#animal-sniffer-annotations;1.14 in central
-:: resolution report :: resolve 766ms :: artifacts dl 34ms
+        found org.apache.spark#spark-sql-kafka-0-10_2.12;3.3.0 in central
+        found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.3.0 in central
+        found org.apache.hadoop#hadoop-client-runtime;3.3.2 in central
+        found org.spark-project.spark#unused;1.0.0 in central
+        found org.apache.hadoop#hadoop-client-api;3.3.2 in central
+        found org.xerial.snappy#snappy-java;1.1.8.4 in central
+        found org.slf4j#slf4j-api;1.7.32 in central
+        found commons-logging#commons-logging;1.1.3 in central
+        found com.google.code.findbugs#jsr305;3.0.0 in central
+        found org.apache.commons#commons-pool2;2.11.1 in central
+        found org.apache.kafka#kafka-clients;3.2.0 in central
+        found com.github.luben#zstd-jni;1.5.2-1 in central
+        found org.lz4#lz4-java;1.8.0 in central
+        found org.slf4j#slf4j-api;1.7.36 in central
+        found net.snowflake#spark-snowflake_2.12;2.13.0-spark_3.3 in central
+        found net.snowflake#snowflake-ingest-sdk;0.10.8 in central
+        found net.snowflake#snowflake-jdbc;3.13.30 in central
+downloading https://repo1.maven.org/maven2/net/snowflake/spark-snowflake_2.12/2.13.0-spark_3.3/spark-snowflake_2.12-2.13.0-spark_3.3.jar ...
+        [SUCCESSFUL ] net.snowflake#spark-snowflake_2.12;2.13.0-spark_3.3!spark-snowflake_2.12.jar (953ms)
+downloading https://repo1.maven.org/maven2/net/snowflake/snowflake-ingest-sdk/0.10.8/snowflake-ingest-sdk-0.10.8.jar ...
+        [SUCCESSFUL ] net.snowflake#snowflake-ingest-sdk;0.10.8!snowflake-ingest-sdk.jar (4763ms)
+downloading https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.13.30/snowflake-jdbc-3.13.30.jar ...
+        [SUCCESSFUL ] net.snowflake#snowflake-jdbc;3.13.30!snowflake-jdbc.jar (20142ms)
+:: resolution report :: resolve 2833ms :: artifacts dl 25921ms
         :: modules in use:
         com.amazonaws#aws-java-sdk-bundle;1.11.563 from central in [default]
-        com.google.code.findbugs#jsr305;1.3.9 from central in [default]
+        com.github.luben#zstd-jni;1.5.2-1 from central in [default]
+        com.google.code.findbugs#jsr305;3.0.0 from central in [default]
         com.google.errorprone#error_prone_annotations;2.0.18 from central in [default]
         com.google.guava#guava;23.0 from central in [default]
         com.google.j2objc#j2objc-annotations;1.1 from central in [default]
+        commons-logging#commons-logging;1.1.3 from central in [default]
+        net.snowflake#snowflake-ingest-sdk;0.10.8 from central in [default]
+        net.snowflake#snowflake-jdbc;3.13.30 from central in [default]
+        net.snowflake#spark-snowflake_2.12;2.13.0-spark_3.3 from central in [default]
+        org.apache.commons#commons-pool2;2.11.1 from central in [default]
         org.apache.hadoop#hadoop-aws;3.2.2 from central in [default]
+        org.apache.hadoop#hadoop-client-api;3.3.2 from central in [default]
+        org.apache.hadoop#hadoop-client-runtime;3.3.2 from central in [default]
+        org.apache.kafka#kafka-clients;3.2.0 from central in [default]
+        org.apache.spark#spark-sql-kafka-0-10_2.12;3.3.0 from central in [default]
+        org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.3.0 from central in [default]
         org.checkerframework#checker-qual;3.5.0 from central in [default]
         org.codehaus.mojo#animal-sniffer-annotations;1.14 from central in [default]
+        org.lz4#lz4-java;1.8.0 from central in [default]
         org.postgresql#postgresql;42.2.23 from central in [default]
+        org.slf4j#slf4j-api;1.7.36 from central in [default]
+        org.spark-project.spark#unused;1.0.0 from central in [default]
+        org.xerial.snappy#snappy-java;1.1.8.4 from central in [default]
+        :: evicted modules:
+        com.google.code.findbugs#jsr305;1.3.9 by [com.google.code.findbugs#jsr305;3.0.0] in [default]
+        org.apache.kafka#kafka-clients;2.8.1 by [org.apache.kafka#kafka-clients;3.2.0] in [default]
+        org.slf4j#slf4j-api;1.7.32 by [org.slf4j#slf4j-api;1.7.36] in [default]
+        net.snowflake#snowflake-jdbc;3.13.23 by [net.snowflake#snowflake-jdbc;3.13.30] in [default]
         ---------------------------------------------------------------------
         |                  |            modules            ||   artifacts   |
         |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
         ---------------------------------------------------------------------
-        |      default     |   9   |   0   |   0   |   0   ||   9   |   0   |
+        |      default     |   28  |   3   |   3   |   4   ||   24  |   3   |
         ---------------------------------------------------------------------
-:: retrieving :: org.apache.spark#spark-submit-parent-9c28a1a5-98a3-48fe-9f11-3c5ef8331b03
+:: retrieving :: org.apache.spark#spark-submit-parent-ab888077-fa73-4c08-a37b-f18371177073
         confs: [default]
-        0 artifacts copied, 9 already retrieved (0kB/28ms)
-25/12/14 17:44:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-25/12/14 17:44:35 INFO SparkContext: Running Spark version 3.3.0
-25/12/14 17:44:35 INFO ResourceUtils: ==============================================================
-25/12/14 17:44:35 INFO ResourceUtils: No custom resources configured for spark.driver.
-25/12/14 17:44:35 INFO ResourceUtils: ==============================================================
-25/12/14 17:44:35 INFO SparkContext: Submitted application: ECommerceETL
-25/12/14 17:44:35 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
-25/12/14 17:44:35 INFO ResourceProfile: Limiting resource is cpu
-25/12/14 17:44:35 INFO ResourceProfileManager: Added ResourceProfile id: 0
-25/12/14 17:44:35 INFO SecurityManager: Changing view acls to: root
-25/12/14 17:44:35 INFO SecurityManager: Changing modify acls to: root
-25/12/14 17:44:35 INFO SecurityManager: Changing view acls groups to: 
-25/12/14 17:44:35 INFO SecurityManager: Changing modify acls groups to: 
-25/12/14 17:44:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
-25/12/14 17:44:36 INFO Utils: Successfully started service 'sparkDriver' on port 37251.
-25/12/14 17:44:36 INFO SparkEnv: Registering MapOutputTracker
-25/12/14 17:44:36 INFO SparkEnv: Registering BlockManagerMaster
-25/12/14 17:44:36 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-25/12/14 17:44:36 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-25/12/14 17:44:36 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
-25/12/14 17:44:36 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-4ffb13f6-f722-4231-966d-826de3da1f59
-25/12/14 17:44:36 INFO MemoryStore: MemoryStore started with capacity 366.3 MiB
-25/12/14 17:44:36 INFO SparkEnv: Registering OutputCommitCoordinator
-25/12/14 17:44:36 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar at spark://21845f18bda9:37251/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.postgresql_postgresql-42.2.23.jar at spark://21845f18bda9:37251/jars/org.postgresql_postgresql-42.2.23.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.guava_guava-23.0.jar at spark://21845f18bda9:37251/jars/com.google.guava_guava-23.0.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar at spark://21845f18bda9:37251/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.checkerframework_checker-qual-3.5.0.jar at spark://21845f18bda9:37251/jars/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.code.findbugs_jsr305-1.3.9.jar at spark://21845f18bda9:37251/jars/com.google.code.findbugs_jsr305-1.3.9.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.errorprone_error_prone_annotations-2.0.18.jar at spark://21845f18bda9:37251/jars/com.google.errorprone_error_prone_annotations-2.0.18.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar at spark://21845f18bda9:37251/jars/com.google.j2objc_j2objc-annotations-1.1.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar at spark://21845f18bda9:37251/jars/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar at spark://21845f18bda9:37251/files/org.apache.hadoop_hadoop-aws-3.2.2.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/org.apache.hadoop_hadoop-aws-3.2.2.jar
-25/12/14 17:44:36 INFO SparkContext: Added file file:///root/.ivy2/jars/org.postgresql_postgresql-42.2.23.jar at spark://21845f18bda9:37251/files/org.postgresql_postgresql-42.2.23.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO Utils: Copying /root/.ivy2/jars/org.postgresql_postgresql-42.2.23.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/org.postgresql_postgresql-42.2.23.jar
-25/12/14 17:44:36 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.guava_guava-23.0.jar at spark://21845f18bda9:37251/files/com.google.guava_guava-23.0.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO Utils: Copying /root/.ivy2/jars/com.google.guava_guava-23.0.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/com.google.guava_guava-23.0.jar
-25/12/14 17:44:36 INFO SparkContext: Added file file:///root/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar at spark://21845f18bda9:37251/files/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar with timestamp 1765734275104
-25/12/14 17:44:36 INFO Utils: Copying /root/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar
-25/12/14 17:44:37 INFO SparkContext: Added file file:///root/.ivy2/jars/org.checkerframework_checker-qual-3.5.0.jar at spark://21845f18bda9:37251/files/org.checkerframework_checker-qual-3.5.0.jar with timestamp 1765734275104
-25/12/14 17:44:37 INFO Utils: Copying /root/.ivy2/jars/org.checkerframework_checker-qual-3.5.0.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/org.checkerframework_checker-qual-3.5.0.jar
-25/12/14 17:44:37 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.code.findbugs_jsr305-1.3.9.jar at spark://21845f18bda9:37251/files/com.google.code.findbugs_jsr305-1.3.9.jar with timestamp 1765734275104
-25/12/14 17:44:37 INFO Utils: Copying /root/.ivy2/jars/com.google.code.findbugs_jsr305-1.3.9.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/com.google.code.findbugs_jsr305-1.3.9.jar
-25/12/14 17:44:37 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.errorprone_error_prone_annotations-2.0.18.jar at spark://21845f18bda9:37251/files/com.google.errorprone_error_prone_annotations-2.0.18.jar with timestamp 1765734275104
-25/12/14 17:44:37 INFO Utils: Copying /root/.ivy2/jars/com.google.errorprone_error_prone_annotations-2.0.18.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/com.google.errorprone_error_prone_annotations-2.0.18.jar
-25/12/14 17:44:37 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar at spark://21845f18bda9:37251/files/com.google.j2objc_j2objc-annotations-1.1.jar with timestamp 1765734275104
-25/12/14 17:44:37 INFO Utils: Copying /root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/com.google.j2objc_j2objc-annotations-1.1.jar
-25/12/14 17:44:37 INFO SparkContext: Added file file:///root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar at spark://21845f18bda9:37251/files/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar with timestamp 1765734275104
-25/12/14 17:44:37 INFO Utils: Copying /root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar to /tmp/spark-0a682d28-5f7d-4e06-9f8c-a7979761e32d/userFiles-8ecec4ba-a8c6-4aed-b408-7f1af8e286f5/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar
-25/12/14 17:44:37 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
-25/12/14 17:44:37 INFO TransportClientFactory: Successfully created connection to spark-master/172.19.0.4:7077 after 48 ms (0 ms spent in bootstraps)
-25/12/14 17:44:37 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20251214174437-0003
-25/12/14 17:44:37 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 37077.
-25/12/14 17:44:37 INFO NettyBlockTransferService: Server created on 21845f18bda9:37077
-25/12/14 17:44:37 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-25/12/14 17:44:37 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 21845f18bda9, 37077, None)
-25/12/14 17:44:37 INFO BlockManagerMasterEndpoint: Registering block manager 21845f18bda9:37077 with 366.3 MiB RAM, BlockManagerId(driver, 21845f18bda9, 37077, None)
-25/12/14 17:44:37 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 21845f18bda9, 37077, None)
-25/12/14 17:44:37 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 21845f18bda9, 37077, None)
-25/12/14 17:44:38 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
-connecting to minio
-25/12/14 17:44:38 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
-25/12/14 17:44:38 INFO SharedState: Warehouse path is 'file:/spark-warehouse'.
-25/12/14 17:44:40 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
-25/12/14 17:44:40 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
-25/12/14 17:44:40 INFO MetricsSystemImpl: s3a-file-system metrics system started
-25/12/14 17:44:41 INFO InMemoryFileIndex: It took 112 ms to list leaf files for 1 paths.
-25/12/14 17:44:41 INFO InMemoryFileIndex: It took 6 ms to list leaf files for 1 paths.
-25/12/14 17:44:45 INFO FileSourceStrategy: Pushed Filters: 
-25/12/14 17:44:45 INFO FileSourceStrategy: Post-Scan Filters: (length(trim(value#0, None)) > 0)
-25/12/14 17:44:45 INFO FileSourceStrategy: Output Data Schema: struct<value: string>
-25/12/14 17:44:46 INFO CodeGenerator: Code generated in 303.503625 ms
-25/12/14 17:44:46 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 367.8 KiB, free 365.9 MiB)
-25/12/14 17:44:47 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 36.0 KiB, free 365.9 MiB)
-25/12/14 17:44:47 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 21845f18bda9:37077 (size: 36.0 KiB, free: 366.3 MiB)
-25/12/14 17:44:47 INFO SparkContext: Created broadcast 0 from csv at NativeMethodAccessorImpl.java:0
-25/12/14 17:44:47 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194304 bytes, open cost is considered as scanning 4194304 bytes.
-25/12/14 17:44:47 INFO SparkContext: Starting job: csv at NativeMethodAccessorImpl.java:0
-25/12/14 17:44:47 INFO DAGScheduler: Got job 0 (csv at NativeMethodAccessorImpl.java:0) with 1 output partitions
-25/12/14 17:44:47 INFO DAGScheduler: Final stage: ResultStage 0 (csv at NativeMethodAccessorImpl.java:0)
-25/12/14 17:44:47 INFO DAGScheduler: Parents of final stage: List()
-25/12/14 17:44:47 INFO DAGScheduler: Missing parents: List()
-25/12/14 17:44:47 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[3] at csv at NativeMethodAccessorImpl.java:0), which has no missing parents
-25/12/14 17:44:47 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 11.8 KiB, free 365.9 MiB)
-25/12/14 17:44:47 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 5.9 KiB, free 365.9 MiB)
-25/12/14 17:44:47 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 21845f18bda9:37077 (size: 5.9 KiB, free: 366.3 MiB)
-25/12/14 17:44:47 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1513
-25/12/14 17:44:47 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[3] at csv at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
-25/12/14 17:44:47 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks resource profile 0
-25/12/14 17:45:02 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:45:17 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:45:32 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:45:47 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:46:02 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:46:17 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:46:32 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:46:47 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:47:02 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:47:17 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:47:32 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:47:47 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:48:02 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:48:17 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:48:32 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:48:47 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:49:02 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:49:17 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:49:32 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:49:47 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:50:02 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:50:17 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-25/12/14 17:50:32 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
-
+        24 artifacts copied, 0 already retrieved (234966kB/304ms)
+26/01/17 00:39:27 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Traceback (most recent call last):
+  File "/app/etl_job.py", line 6, in <module>
+    from dotenv import load_dotenv
+ModuleNotFoundError: No module named 'dotenv'
+26/01/17 00:39:27 INFO ShutdownHookManager: Shutdown hook called
+26/01/17 00:39:27 INFO ShutdownHookManager: Deleting directory /tmp/spark-928e39d5-2ebb-43a7-81c1-1a8ea7f388ff

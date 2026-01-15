@@ -4,3 +4,6 @@ ex01/.terraform/
 .vscode/
 ex00/postgres_data/
 ex00/spark-logs/
+ex00/.env
+ex02/.env
+ex02/logs.txt

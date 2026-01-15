@@ -1,0 +1,4 @@
+Before running, verify your Spark version inside the container:
+docker exec -it spark-master /spark/bin/spark-shell --version
+
+This will tell you the exact Spark version, and you can pick the right Snowflake connector from: https://repo1.maven.org/maven2/net/snowflake/

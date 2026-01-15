@@ -5,10 +5,12 @@ org.apache.hadoop:hadoop-aws:3.2.2,\
 org.postgresql:postgresql:42.2.23,\
 com.google.guava:guava:23.0,\
 org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0,\
-org.apache.kafka:kafka-clients:3.2.0 \
+org.apache.kafka:kafka-clients:3.2.0,\
+net.snowflake:spark-snowflake_2.12:2.13.0-spark_3.3,\
+net.snowflake:snowflake-jdbc:3.13.23 \
   --conf spark.executor.extraClassPath=/spark/jars/* \
   --conf spark.driver.extraClassPath=/spark/jars/* \
   /app/etl_job.py
 
 
-/spark/bin/spark-submit   --master spark://spark-master:7077   --packages org.apache.hadoop:hadoop-aws:3.2.2,org.postgresql:postgresql:42.2.23,com.google.guava:guava:23.0   --conf spark.executor.extraClassPath=/spark/jars/*   --conf spark.driver.extraClassPath=/spark/jars/*   /app/etl_job.py
+/spark/bin/spark-submit   --master spark://spark-master:7077   --packages org.apache.hadoop:hadoop-aws:3.2.2,org.postgresql:postgresql:42.2.23,com.google.guava:guava:23.0,net.snowflake:spark-snowflake_2.12:2.11.0,net.snowflake:snowflake-jdbc:3.13.23   --conf spark.executor.extraClassPath=/spark/jars/*   --conf spark.driver.extraClassPath=/spark/jars/*   /app/etl_job.py 
