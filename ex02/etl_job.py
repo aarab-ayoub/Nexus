@@ -114,9 +114,18 @@ def batch_ETL(spark, postgres_url, postgres_properties):
 	    "sfWarehouse": WAREHOUSE
 	}
 
-	# select/align columns to match Snowflake table schema if needed
+	# Select only columns that exist in the DataFrame
+	# Matching the warehouse.sql schema: order_id, user_id, product_id, quantity, total_amount, signup_date, country, category, product_price
 	to_sf = final_result.select(
-	    "order_id", "user_id", "product_id", "name","email", "signup_date","category", "price"
+	    "order_id", 
+	    "user_id", 
+	    "product_id", 
+	    "quantity", 
+	    "total_amount", 
+	    "signup_date", 
+	    "country", 
+	    "category", 
+	    F.col("price").alias("product_price")
 	)
 
 	to_sf.write \
