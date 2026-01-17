@@ -1,104 +1,378 @@
-/spark/bin/spark-submit \
->   --master spark://spark-master:7077 \
->   --packages \
-> org.apache.hadoop:hadoop-aws:3.2.2,\
-> org.postgresql:postgresql:42.2.23,\
-> com.google.guava:guava:23.0,\
-> org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0,\
-> org.apache.kafka:kafka-clients:3.2.0,\
-> net.snowflake:spark-snowflake_2.12:2.13.0-spark_3.3,\
-> net.snowflake:snowflake-jdbc:3.13.23 \
->   --conf spark.executor.extraClassPath=/spark/jars/* \
->   --conf spark.driver.extraClassPath=/spark/jars/* \
->   /app/etl_job.py
-:: loading settings :: url = jar:file:/spark/jars/ivy-2.5.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
-Ivy Default Cache set to: /root/.ivy2/cache
-The jars for the packages stored in: /root/.ivy2/jars
-org.apache.hadoop#hadoop-aws added as a dependency
-org.postgresql#postgresql added as a dependency
-com.google.guava#guava added as a dependency
-org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
-org.apache.kafka#kafka-clients added as a dependency
-net.snowflake#spark-snowflake_2.12 added as a dependency
-net.snowflake#snowflake-jdbc added as a dependency
-:: resolving dependencies :: org.apache.spark#spark-submit-parent-ab888077-fa73-4c08-a37b-f18371177073;1.0
-        confs: [default]
-        found org.apache.hadoop#hadoop-aws;3.2.2 in central
-        found com.amazonaws#aws-java-sdk-bundle;1.11.563 in central
-        found org.postgresql#postgresql;42.2.23 in central
-        found org.checkerframework#checker-qual;3.5.0 in central
-        found com.google.guava#guava;23.0 in central
-        found com.google.code.findbugs#jsr305;1.3.9 in central
-        found com.google.errorprone#error_prone_annotations;2.0.18 in central
-        found com.google.j2objc#j2objc-annotations;1.1 in central
-        found org.codehaus.mojo#animal-sniffer-annotations;1.14 in central
-        found org.apache.spark#spark-sql-kafka-0-10_2.12;3.3.0 in central
-        found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.3.0 in central
-        found org.apache.hadoop#hadoop-client-runtime;3.3.2 in central
-        found org.spark-project.spark#unused;1.0.0 in central
-        found org.apache.hadoop#hadoop-client-api;3.3.2 in central
-        found org.xerial.snappy#snappy-java;1.1.8.4 in central
-        found org.slf4j#slf4j-api;1.7.32 in central
-        found commons-logging#commons-logging;1.1.3 in central
-        found com.google.code.findbugs#jsr305;3.0.0 in central
-        found org.apache.commons#commons-pool2;2.11.1 in central
-        found org.apache.kafka#kafka-clients;3.2.0 in central
-        found com.github.luben#zstd-jni;1.5.2-1 in central
-        found org.lz4#lz4-java;1.8.0 in central
-        found org.slf4j#slf4j-api;1.7.36 in central
-        found net.snowflake#spark-snowflake_2.12;2.13.0-spark_3.3 in central
-        found net.snowflake#snowflake-ingest-sdk;0.10.8 in central
-        found net.snowflake#snowflake-jdbc;3.13.30 in central
-downloading https://repo1.maven.org/maven2/net/snowflake/spark-snowflake_2.12/2.13.0-spark_3.3/spark-snowflake_2.12-2.13.0-spark_3.3.jar ...
-        [SUCCESSFUL ] net.snowflake#spark-snowflake_2.12;2.13.0-spark_3.3!spark-snowflake_2.12.jar (953ms)
-downloading https://repo1.maven.org/maven2/net/snowflake/snowflake-ingest-sdk/0.10.8/snowflake-ingest-sdk-0.10.8.jar ...
-        [SUCCESSFUL ] net.snowflake#snowflake-ingest-sdk;0.10.8!snowflake-ingest-sdk.jar (4763ms)
-downloading https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.13.30/snowflake-jdbc-3.13.30.jar ...
-        [SUCCESSFUL ] net.snowflake#snowflake-jdbc;3.13.30!snowflake-jdbc.jar (20142ms)
-:: resolution report :: resolve 2833ms :: artifacts dl 25921ms
-        :: modules in use:
-        com.amazonaws#aws-java-sdk-bundle;1.11.563 from central in [default]
-        com.github.luben#zstd-jni;1.5.2-1 from central in [default]
-        com.google.code.findbugs#jsr305;3.0.0 from central in [default]
-        com.google.errorprone#error_prone_annotations;2.0.18 from central in [default]
-        com.google.guava#guava;23.0 from central in [default]
-        com.google.j2objc#j2objc-annotations;1.1 from central in [default]
-        commons-logging#commons-logging;1.1.3 from central in [default]
-        net.snowflake#snowflake-ingest-sdk;0.10.8 from central in [default]
-        net.snowflake#snowflake-jdbc;3.13.30 from central in [default]
-        net.snowflake#spark-snowflake_2.12;2.13.0-spark_3.3 from central in [default]
-        org.apache.commons#commons-pool2;2.11.1 from central in [default]
-        org.apache.hadoop#hadoop-aws;3.2.2 from central in [default]
-        org.apache.hadoop#hadoop-client-api;3.3.2 from central in [default]
-        org.apache.hadoop#hadoop-client-runtime;3.3.2 from central in [default]
-        org.apache.kafka#kafka-clients;3.2.0 from central in [default]
-        org.apache.spark#spark-sql-kafka-0-10_2.12;3.3.0 from central in [default]
-        org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.3.0 from central in [default]
-        org.checkerframework#checker-qual;3.5.0 from central in [default]
-        org.codehaus.mojo#animal-sniffer-annotations;1.14 from central in [default]
-        org.lz4#lz4-java;1.8.0 from central in [default]
-        org.postgresql#postgresql;42.2.23 from central in [default]
-        org.slf4j#slf4j-api;1.7.36 from central in [default]
-        org.spark-project.spark#unused;1.0.0 from central in [default]
-        org.xerial.snappy#snappy-java;1.1.8.4 from central in [default]
-        :: evicted modules:
-        com.google.code.findbugs#jsr305;1.3.9 by [com.google.code.findbugs#jsr305;3.0.0] in [default]
-        org.apache.kafka#kafka-clients;2.8.1 by [org.apache.kafka#kafka-clients;3.2.0] in [default]
-        org.slf4j#slf4j-api;1.7.32 by [org.slf4j#slf4j-api;1.7.36] in [default]
-        net.snowflake#snowflake-jdbc;3.13.23 by [net.snowflake#snowflake-jdbc;3.13.30] in [default]
-        ---------------------------------------------------------------------
-        |                  |            modules            ||   artifacts   |
-        |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
-        ---------------------------------------------------------------------
-        |      default     |   28  |   3   |   3   |   4   ||   24  |   3   |
-        ---------------------------------------------------------------------
-:: retrieving :: org.apache.spark#spark-submit-parent-ab888077-fa73-4c08-a37b-f18371177073
-        confs: [default]
-        24 artifacts copied, 0 already retrieved (234966kB/304ms)
-26/01/17 00:39:27 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-Traceback (most recent call last):
-  File "/app/etl_job.py", line 6, in <module>
-    from dotenv import load_dotenv
-ModuleNotFoundError: No module named 'dotenv'
-26/01/17 00:39:27 INFO ShutdownHookManager: Shutdown hook called
-26/01/17 00:39:27 INFO ShutdownHookManager: Deleting directory /tmp/spark-928e39d5-2ebb-43a7-81c1-1a8ea7f388ff
+-jni-1.5.2-1.jar,file:///root/.ivy2/jars/org.lz4_lz4-java-1.8.0.jar,file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.36.jar,file:///root/.ivy2/jars/net.snowflake_snowflake-ingest-sdk-0.10.8.jar,file:///root/.ivy2/jars/net.snowflake_snowflake-jdbc-3.13.30.jar",
+    "spark.driver.host" : "34b367be0d1a",
+    "spark.sql.warehouse.dir" : "N/A",
+    "spark.app.submitTime" : "N/A",
+    "spark.hadoop.fs.s3a.aws.credentials.provider" : "N/A",
+    "spark.executor.id" : "driver",
+    "spark.app.initial.file.urls" : "N/A",
+    "spark.submit.pyFiles" : "N/A",
+    "spark.driver.extraClassPath" : "N/A",
+    "spark.files" : "N/A",
+    "spark.rdd.compress" : "N/A",
+    "spark.app.startTime" : "N/A",
+    "spark.master" : "spark://spark-master:7077",
+    "spark.hadoop.fs.s3a.access.key" : "N/A",
+    "spark.driver.port" : "N/A",
+    "spark.executor.extraJavaOptions" : "-XX:+IgnoreUnrecognizedVMOptions --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.nio.cs=ALL-UNNAMED --add-opens=java.base/sun.security.action=ALL-UNNAMED --add-opens=java.base/sun.util.calendar=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED",
+    "spark.executor.extraClassPath" : "N/A",
+    "spark.app.id" : "app-20260117012343-0001",
+    "spark.serializer.objectStreamReset" : "N/A",
+    "spark.submit.deployMode" : "client",
+    "spark.hadoop.fs.s3a.endpoint" : "N/A",
+    "spark.repl.local.jars" : "file:///root/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar,file:///root/.ivy2/jars/org.postgresql_postgresql-42.2.23.jar,file:///root/.ivy2/jars/com.google.guava_guava-23.0.jar,file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.3.0.jar,file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-3.2.0.jar,file:///root/.ivy2/jars/net.snowflake_spark-snowflake_2.12-2.13.0-spark_3.3.jar,file:///root/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar,file:///root/.ivy2/jars/org.checkerframework_checker-qual-3.5.0.jar,file:///root/.ivy2/jars/com.google.errorprone_error_prone_annotations-2.0.18.jar,file:///root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar,file:///root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar,file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.3.0.jar,file:///root/.ivy2/jars/com.google.code.findbugs_jsr305-3.0.0.jar,file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.11.1.jar,file:///root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar,file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-runtime-3.3.2.jar,file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-api-3.3.2.jar,file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.8.4.jar,file:///root/.ivy2/jars/commons-logging_commons-logging-1.1.3.jar,file:///root/.ivy2/jars/com.github.luben_zstd-jni-1.5.2-1.jar,file:///root/.ivy2/jars/org.lz4_lz4-java-1.8.0.jar,file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.36.jar,file:///root/.ivy2/jars/net.snowflake_snowflake-ingest-sdk-0.10.8.jar,file:///root/.ivy2/jars/net.snowflake_snowflake-jdbc-3.13.30.jar",
+    "spark.app.initial.jar.urls" : "N/A",
+    "spark.hadoop.fs.s3a.secret.key" : "N/A"
+  },
+  "libraries" : [ "py4j", "py4j.commands", "py4j.reflection", "sun.reflect" ],
+  "dependencies" : [ "file:///root/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.2.2.jar", "file:///root/.ivy2/jars/org.postgresql_postgresql-42.2.23.jar", "file:///root/.ivy2/jars/com.google.guava_guava-23.0.jar", "file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.3.0.jar", "file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-3.2.0.jar", "file:///root/.ivy2/jars/net.snowflake_spark-snowflake_2.12-2.13.0-spark_3.3.jar", "file:///root/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.11.563.jar", "file:///root/.ivy2/jars/org.checkerframework_checker-qual-3.5.0.jar", "file:///root/.ivy2/jars/com.google.errorprone_error_prone_annotations-2.0.18.jar", "file:///root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar", "file:///root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.14.jar", "file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.3.0.jar", "file:///root/.ivy2/jars/com.google.code.findbugs_jsr305-3.0.0.jar", "file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.11.1.jar", "file:///root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar", "file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-runtime-3.3.2.jar", "file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-api-3.3.2.jar", "file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.8.4.jar", "file:///root/.ivy2/jars/commons-logging_commons-logging-1.1.3.jar", "file:///root/.ivy2/jars/com.github.luben_zstd-jni-1.5.2-1.jar", "file:///root/.ivy2/jars/org.lz4_lz4-java-1.8.0.jar", "file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.36.jar", "file:///root/.ivy2/jars/net.snowflake_snowflake-ingest-sdk-0.10.8.jar", "file:///root/.ivy2/jars/net.snowflake_snowflake-jdbc-3.13.30.jar" ],
+  "cluster_node_count" : 2,
+  "spark_default_parallelism" : 2,
+  "deploy_mode" : "client"
+}
+26/01/17 01:24:08 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: alter session set timezone = 'GMT' , timestamp_ntz_output_format = 'YYYY-MM-DD HH24:MI:SS.FF3', timestamp_ltz_output_format = 'TZHTZM YYYY-MM-DD HH24:MI:SS.FF3', timestamp_tz_output_format = 'TZHTZM YYYY-MM-DD HH24:MI:SS.FF3' ; 
+26/01/17 01:24:08 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: create  temporary stage if not exists identifier(?) 
+26/01/17 01:24:10 INFO CloudStorageOperations$: Spark Connector Master: Begin to process and upload data for 1 partitions: directory=i44QRebD0g CSV true
+26/01/17 01:24:10 INFO CloudStorageOperations$: Spark Connector Master: Begin to retrieve pre-signed URL or down-scoped token for 1 files by calling PUT command.
+26/01/17 01:24:11 INFO CloudStorageOperations$: Spark Connector Master: Upload file to GCP with down-scoped token instead of pre-signed URL.
+26/01/17 01:24:11 INFO CloudStorageOperations$: Spark Connector Master: Time to retrieve down-scoped token for 1/1 files is 302 ms.
+26/01/17 01:24:11 INFO SparkContext: Starting job: collect at CloudStorageOperations.scala:1862
+26/01/17 01:24:11 INFO DAGScheduler: Got job 11 (collect at CloudStorageOperations.scala:1862) with 1 output partitions
+26/01/17 01:24:11 INFO DAGScheduler: Final stage: ResultStage 11 (collect at CloudStorageOperations.scala:1862)
+26/01/17 01:24:11 INFO DAGScheduler: Parents of final stage: List()
+26/01/17 01:24:11 INFO DAGScheduler: Missing parents: List()
+26/01/17 01:24:11 INFO DAGScheduler: Submitting ResultStage 11 (MapPartitionsRDD[59] at mapPartitionsWithIndex at CloudStorageOperations.scala:1839), which has no missing parents
+26/01/17 01:24:11 INFO MemoryStore: Block broadcast_27 stored as values in memory (estimated size 65.8 KiB, free 361.0 MiB)
+26/01/17 01:24:11 INFO MemoryStore: Block broadcast_27_piece0 stored as bytes in memory (estimated size 28.6 KiB, free 361.0 MiB)
+26/01/17 01:24:11 INFO BlockManagerInfo: Added broadcast_27_piece0 in memory on 34b367be0d1a:41201 (size: 28.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:11 INFO SparkContext: Created broadcast 27 from broadcast at DAGScheduler.scala:1513
+26/01/17 01:24:11 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 11 (MapPartitionsRDD[59] at mapPartitionsWithIndex at CloudStorageOperations.scala:1839) (first 15 tasks are for partitions Vector(0))
+26/01/17 01:24:11 INFO TaskSchedulerImpl: Adding task set 11.0 with 1 tasks resource profile 0
+26/01/17 01:24:11 INFO TaskSetManager: Starting task 0.0 in stage 11.0 (TID 11) (172.18.0.7, executor 0, partition 0, PROCESS_LOCAL, 4910 bytes) taskResourceAssignments Map()
+26/01/17 01:24:11 INFO BlockManagerInfo: Added broadcast_27_piece0 in memory on 172.18.0.7:33335 (size: 28.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:11 INFO BlockManagerInfo: Added broadcast_24_piece0 in memory on 172.18.0.7:33335 (size: 4.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:11 INFO BlockManagerInfo: Added broadcast_25_piece0 in memory on 172.18.0.7:33335 (size: 5.1 KiB, free: 366.2 MiB)
+26/01/17 01:24:11 ERROR Inbox: Ignoring error
+java.io.NotSerializableException: org.apache.spark.storage.StorageStatus
+Serialization stack:
+        - object not serializable (class: org.apache.spark.storage.StorageStatus, value: org.apache.spark.storage.StorageStatus@4eb839b5)
+        - element of array (index: 0)
+        - array (class [Lorg.apache.spark.storage.StorageStatus;, size 2)
+        at org.apache.spark.serializer.SerializationDebugger$.improveException(SerializationDebugger.scala:41)
+        at org.apache.spark.serializer.JavaSerializationStream.writeObject(JavaSerializer.scala:49)
+        at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:115)
+        at org.apache.spark.rpc.netty.NettyRpcEnv.serialize(NettyRpcEnv.scala:286)
+        at org.apache.spark.rpc.netty.RemoteNettyRpcCallContext.send(NettyRpcCallContext.scala:64)
+        at org.apache.spark.rpc.netty.NettyRpcCallContext.reply(NettyRpcCallContext.scala:32)
+        at org.apache.spark.storage.BlockManagerMasterEndpoint$$anonfun$receiveAndReply$1.applyOrElse(BlockManagerMasterEndpoint.scala:160)
+        at org.apache.spark.rpc.netty.Inbox.$anonfun$process$1(Inbox.scala:103)
+        at org.apache.spark.rpc.netty.Inbox.safelyCall(Inbox.scala:213)
+        at org.apache.spark.rpc.netty.Inbox.process(Inbox.scala:100)
+        at org.apache.spark.rpc.netty.MessageLoop.org$apache$spark$rpc$netty$MessageLoop$$receiveLoop(MessageLoop.scala:75)
+        at org.apache.spark.rpc.netty.MessageLoop$$anon$1.run(MessageLoop.scala:41)
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:748)
+26/01/17 01:24:11 INFO BlockManagerInfo: Added broadcast_26_piece0 in memory on 172.18.0.7:33335 (size: 37.8 KiB, free: 366.2 MiB)
+26/01/17 01:24:12 INFO TaskSetManager: Finished task 0.0 in stage 11.0 (TID 11) in 1765 ms on 172.18.0.7 (executor 0) (1/1)
+26/01/17 01:24:12 INFO TaskSchedulerImpl: Removed TaskSet 11.0, whose tasks have all completed, from pool 
+26/01/17 01:24:12 INFO DAGScheduler: ResultStage 11 (collect at CloudStorageOperations.scala:1862) finished in 1.795 s
+26/01/17 01:24:12 INFO DAGScheduler: Job 11 is finished. Cancelling potential speculative or zombie tasks for this job
+26/01/17 01:24:12 INFO TaskSchedulerImpl: Killing all running tasks in stage 11: Stage finished
+26/01/17 01:24:12 INFO DAGScheduler: Job 11 finished: collect at CloudStorageOperations.scala:1862, took 1.818814 s
+26/01/17 01:24:12 INFO CloudStorageOperations$: Spark Connector Master: Finish uploading data for 1 partitions in 2.19 seconds.
+26/01/17 01:24:12 INFO StageWriter$: writeToTableWithStagingTable: check table existence with "ECOMMERCE_DB"."ETL_SCHEMA".fact_orders for fact_orders
+26/01/17 01:24:12 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: desc table identifier(?) 
+26/01/17 01:24:13 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: create   table if not exists identifier(?) ("ORDER_ID" STRING ,"USER_ID" STRING ,"PRODUCT_ID" STRING ,"QUANTITY" INTEGER ,"TOTAL_AMOUNT" DOUBLE ,"SIGNUP_DATE" TIMESTAMP ,"COUNTRY" STRING ,"CATEGORY" STRING ,"PRODUCT_PRICE" DOUBLE ) 
+26/01/17 01:24:13 INFO StageWriter$: Begin to write at 2026-01-17T01:24:13.321 (Greenwich Mean Time)
+26/01/17 01:24:13 INFO StageWriter$: Total file count is 1, non-empty files count is 1, total file size is 9.68 KB, total row count is 100 Bytes.
+26/01/17 01:24:13 INFO StageWriter$: Now executing below command to write into table:
+copy into fact_orders_staging_1950034272 FROM @spark_connector_load_stage_v11W0ZKxxq/i44QRebD0g/ 
+FILE_FORMAT = (
+    TYPE=CSV
+    FIELD_DELIMITER='|'
+    NULL_IF=()
+    FIELD_OPTIONALLY_ENCLOSED_BY='"'
+    TIMESTAMP_FORMAT='TZHTZM YYYY-MM-DD HH24:MI:SS.FF9'
+    DATE_FORMAT='TZHTZM YYYY-MM-DD HH24:MI:SS.FF9'
+    BINARY_FORMAT=BASE64
+  )
+           
+26/01/17 01:24:13 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: copy into fact_orders_staging_1950034272 FROM @spark_connector_load_stage_v11W0ZKxxq/i44QRebD0g/ 
+FILE_FORMAT = (
+    TYPE=CSV
+    FIELD_DELIMITER='|'
+    NULL_IF=()
+    FIELD_OPTIONALLY_ENCLOSED_BY='"'
+    TIMESTAMP_FORMAT='TZHTZM YYYY-MM-DD HH24:MI:SS.FF9'
+    DATE_FORMAT='TZHTZM YYYY-MM-DD HH24:MI:SS.FF9'
+    BINARY_FORMAT=BASE64
+  )
+            
+26/01/17 01:24:13 INFO SparkConnectorContext$: Spark connector register listener for: app-20260117012343-0001
+26/01/17 01:24:13 INFO SparkConnectorContext$: Add running query for app-20260117012343-0001 session: 867162487091222 queryId: 01c1c814-0001-6c99-0003-14ae000260c6
+26/01/17 01:24:13 INFO StageWriter$: The query ID for async writing into table command is: 01c1c814-0001-6c99-0003-14ae000260c6; The query ID URL is:
+https://uryhmvu-pe93763.snowflakecomputing.com/console#/monitoring/queries/detail?queryId=01c1c814-0001-6c99-0003-14ae000260c6
+26/01/17 01:24:15 INFO BlockManagerInfo: Removed broadcast_27_piece0 on 34b367be0d1a:41201 in memory (size: 28.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:15 INFO BlockManagerInfo: Removed broadcast_27_piece0 on 172.18.0.7:33335 in memory (size: 28.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:15 INFO SparkConnectorContext$: Remove running query for app-20260117012343-0001 session: 867162487091222 queryId: 01c1c814-0001-6c99-0003-14ae000260c6
+26/01/17 01:24:15 INFO StageWriter$: First COPY command is done in 2.65 seconds at 2026-01-17T01:24:15.974, queryID is 01c1c814-0001-6c99-0003-14ae000260c6
+26/01/17 01:24:15 INFO StageWriter$: Succeed to write in 2.66 seconds at 2026-01-17T01:24:15.984
+26/01/17 01:24:15 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: alter table identifier(?) swap with identifier(?) 
+26/01/17 01:24:16 INFO SnowflakeSQLStatement: Spark Connector Master: execute query with bind variable: drop table identifier(?) 
+26/01/17 01:24:16 INFO StageWriter$: Spark Connector Master: Total job time is 5.61 seconds including read & upload time: 2.19 seconds and COPY time: 3.42 seconds.
+loaded succesfuly
+26/01/17 01:24:16 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+26/01/17 01:24:16 WARN ResolveWriteToStream: Temporary checkpoint location created which is deleted normally when the query didn't fail: /tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324. If it's required to delete it under any circumstances, please set spark.sql.streaming.forceDeleteTempCheckpointLocation to true. Important to know deleting temp checkpoint folder is best effort.
+26/01/17 01:24:16 INFO ResolveWriteToStream: Checkpoint root /tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324 resolved to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324.
+26/01/17 01:24:16 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/01/17 01:24:17 INFO CheckpointFileManager: Writing atomically to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/metadata using temp file file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/.metadata.7d9f51aa-5971-49d8-833b-1d1ffa55a38b.tmp
+26/01/17 01:24:17 INFO CheckpointFileManager: Renamed temp file file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/.metadata.7d9f51aa-5971-49d8-833b-1d1ffa55a38b.tmp to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/metadata
+26/01/17 01:24:17 INFO MicroBatchExecution: Starting [id = f244f81e-1fe0-4ec4-856d-74f618bac6d2, runId = d6e5baa0-c969-431c-83f2-c78a58abe8e2]. Use file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324 to store the query checkpoint.
+Streaming query has been started.
+26/01/17 01:24:17 INFO MicroBatchExecution: Reading table [org.apache.spark.sql.kafka010.KafkaSourceProvider$KafkaTable@c31fbe5] from DataSourceV2 named 'kafka' [org.apache.spark.sql.kafka010.KafkaSourceProvider@1d7246f6]
+26/01/17 01:24:17 INFO MicroBatchExecution: Starting new streaming query.
+26/01/17 01:24:17 INFO MicroBatchExecution: Stream started from {}
+26/01/17 01:24:17 INFO ConsumerConfig: ConsumerConfig values: 
+        allow.auto.create.topics = true
+        auto.commit.interval.ms = 5000
+        auto.offset.reset = earliest
+        bootstrap.servers = [kafka:29092]
+        check.crcs = true
+        client.dns.lookup = use_all_dns_ips
+        client.id = consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1
+        client.rack = 
+        connections.max.idle.ms = 540000
+        default.api.timeout.ms = 60000
+        enable.auto.commit = false
+        exclude.internal.topics = true
+        fetch.max.bytes = 52428800
+        fetch.max.wait.ms = 500
+        fetch.min.bytes = 1
+        group.id = spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0
+        group.instance.id = null
+        heartbeat.interval.ms = 3000
+        interceptor.classes = []
+        internal.leave.group.on.close = true
+        internal.throw.on.fetch.stable.offset.unsupported = false
+        isolation.level = read_uncommitted
+        key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+        max.partition.fetch.bytes = 1048576
+        max.poll.interval.ms = 300000
+        max.poll.records = 1
+        metadata.max.age.ms = 300000
+        metric.reporters = []
+        metrics.num.samples = 2
+        metrics.recording.level = INFO
+        metrics.sample.window.ms = 30000
+        partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+        receive.buffer.bytes = 65536
+        reconnect.backoff.max.ms = 1000
+        reconnect.backoff.ms = 50
+        request.timeout.ms = 30000
+        retry.backoff.ms = 100
+        sasl.client.callback.handler.class = null
+        sasl.jaas.config = null
+        sasl.kerberos.kinit.cmd = /usr/bin/kinit
+        sasl.kerberos.min.time.before.relogin = 60000
+        sasl.kerberos.service.name = null
+        sasl.kerberos.ticket.renew.jitter = 0.05
+        sasl.kerberos.ticket.renew.window.factor = 0.8
+        sasl.login.callback.handler.class = null
+        sasl.login.class = null
+        sasl.login.connect.timeout.ms = null
+        sasl.login.read.timeout.ms = null
+        sasl.login.refresh.buffer.seconds = 300
+        sasl.login.refresh.min.period.seconds = 60
+        sasl.login.refresh.window.factor = 0.8
+        sasl.login.refresh.window.jitter = 0.05
+        sasl.login.retry.backoff.max.ms = 10000
+        sasl.login.retry.backoff.ms = 100
+        sasl.mechanism = GSSAPI
+        sasl.oauthbearer.clock.skew.seconds = 30
+        sasl.oauthbearer.expected.audience = null
+        sasl.oauthbearer.expected.issuer = null
+        sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+        sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+        sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+        sasl.oauthbearer.jwks.endpoint.url = null
+        sasl.oauthbearer.scope.claim.name = scope
+        sasl.oauthbearer.sub.claim.name = sub
+        sasl.oauthbearer.token.endpoint.url = null
+        security.protocol = PLAINTEXT
+        security.providers = null
+        send.buffer.bytes = 131072
+        session.timeout.ms = 45000
+        socket.connection.setup.timeout.max.ms = 30000
+        socket.connection.setup.timeout.ms = 10000
+        ssl.cipher.suites = null
+        ssl.enabled.protocols = [TLSv1.2]
+        ssl.endpoint.identification.algorithm = https
+        ssl.engine.factory.class = null
+        ssl.key.password = null
+        ssl.keymanager.algorithm = SunX509
+        ssl.keystore.certificate.chain = null
+        ssl.keystore.key = null
+        ssl.keystore.location = null
+        ssl.keystore.password = null
+        ssl.keystore.type = JKS
+        ssl.protocol = TLSv1.2
+        ssl.provider = null
+        ssl.secure.random.implementation = null
+        ssl.trustmanager.algorithm = PKIX
+        ssl.truststore.certificates = null
+        ssl.truststore.location = null
+        ssl.truststore.password = null
+        ssl.truststore.type = JKS
+        value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+26/01/17 01:24:17 INFO AppInfoParser: Kafka version: 3.2.0
+26/01/17 01:24:17 INFO AppInfoParser: Kafka commitId: 38103ffaa962ef50
+26/01/17 01:24:17 INFO AppInfoParser: Kafka startTimeMs: 1768613057660
+26/01/17 01:24:17 INFO KafkaConsumer: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Subscribed to topic(s): clicks_topic
+26/01/17 01:24:17 INFO BlockManagerInfo: Removed broadcast_24_piece0 on 34b367be0d1a:41201 in memory (size: 4.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_24_piece0 on 172.18.0.7:33335 in memory (size: 4.6 KiB, free: 366.2 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_26_piece0 on 34b367be0d1a:41201 in memory (size: 37.8 KiB, free: 366.2 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_26_piece0 on 172.18.0.7:33335 in memory (size: 37.8 KiB, free: 366.2 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_25_piece0 on 34b367be0d1a:41201 in memory (size: 5.1 KiB, free: 366.2 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_25_piece0 on 172.18.0.7:33335 in memory (size: 5.1 KiB, free: 366.2 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_21_piece0 on 34b367be0d1a:41201 in memory (size: 37.8 KiB, free: 366.3 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_21_piece0 on 172.18.0.7:33335 in memory (size: 37.8 KiB, free: 366.3 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_20_piece0 on 34b367be0d1a:41201 in memory (size: 37.8 KiB, free: 366.3 MiB)
+26/01/17 01:24:18 INFO BlockManagerInfo: Removed broadcast_20_piece0 on 172.18.0.7:33335 in memory (size: 37.8 KiB, free: 366.3 MiB)
+26/01/17 01:24:18 INFO Metadata: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Resetting the last seen epoch of partition clicks_topic-0 to 0 since the associated topicId changed from null to _EWQzPO5QOyzjVSXGNHpNg
+26/01/17 01:24:18 INFO Metadata: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Cluster ID: f-1H6-kDRBO35ZHg3df_Wg
+26/01/17 01:24:18 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Discovered group coordinator kafka:29092 (id: 2147483646 rack: null)
+26/01/17 01:24:18 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] (Re-)joining group
+26/01/17 01:24:18 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Request joining group due to: need to re-join with the given member-id: consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1-5a8b5cd1-6976-484a-9b40-54a63f1e935a
+26/01/17 01:24:18 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] (Re-)joining group
+26/01/17 01:24:21 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Successfully joined group with generation Generation{generationId=1, memberId='consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1-5a8b5cd1-6976-484a-9b40-54a63f1e935a', protocol='range'}
+26/01/17 01:24:21 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Finished assignment for group at generation 1: {consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1-5a8b5cd1-6976-484a-9b40-54a63f1e935a=Assignment(partitions=[clicks_topic-0])}
+26/01/17 01:24:21 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Successfully synced group in generation Generation{generationId=1, memberId='consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1-5a8b5cd1-6976-484a-9b40-54a63f1e935a', protocol='range'}
+26/01/17 01:24:21 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Notifying assignor about the new Assignment(partitions=[clicks_topic-0])
+26/01/17 01:24:21 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Adding newly assigned partitions: clicks_topic-0
+26/01/17 01:24:21 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Found no committed offset for partition clicks_topic-0
+26/01/17 01:24:21 INFO SubscriptionState: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Seeking to EARLIEST offset of partition clicks_topic-0
+26/01/17 01:24:21 INFO SubscriptionState: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Resetting offset for partition clicks_topic-0 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[kafka:29092 (id: 1 rack: null)], epoch=0}}.
+26/01/17 01:24:21 INFO CheckpointFileManager: Writing atomically to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/sources/0/0 using temp file file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/sources/0/.0.2c7b3a19-fd03-4e85-ba86-2115c4362900.tmp
+26/01/17 01:24:21 INFO CheckpointFileManager: Renamed temp file file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/sources/0/.0.2c7b3a19-fd03-4e85-ba86-2115c4362900.tmp to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/sources/0/0
+26/01/17 01:24:21 INFO KafkaMicroBatchStream: Initial offsets: {"clicks_topic":{"0":0}}
+26/01/17 01:24:21 INFO SubscriptionState: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Seeking to LATEST offset of partition clicks_topic-0
+26/01/17 01:24:21 INFO SubscriptionState: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Resetting offset for partition clicks_topic-0 to position FetchPosition{offset=1139, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[kafka:29092 (id: 1 rack: null)], epoch=0}}.
+26/01/17 01:24:21 INFO CheckpointFileManager: Writing atomically to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/offsets/0 using temp file file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/offsets/.0.b98a0077-a307-47b5-92ed-10d00d917d5a.tmp
+26/01/17 01:24:21 INFO CheckpointFileManager: Renamed temp file file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/offsets/.0.b98a0077-a307-47b5-92ed-10d00d917d5a.tmp to file:/tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324/offsets/0
+26/01/17 01:24:21 INFO MicroBatchExecution: Committed offsets for batch 0. Metadata OffsetSeqMetadata(0,1768613061618,Map(spark.sql.streaming.stateStore.providerClass -> org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider, spark.sql.streaming.join.stateFormatVersion -> 2, spark.sql.streaming.stateStore.compression.codec -> lz4, spark.sql.streaming.stateStore.rocksdb.formatVersion -> 5, spark.sql.streaming.statefulOperator.useStrictDistribution -> true, spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion -> 2, spark.sql.streaming.multipleWatermarkPolicy -> min, spark.sql.streaming.aggregation.stateFormatVersion -> 2, spark.sql.shuffle.partitions -> 200))
+26/01/17 01:24:22 INFO KafkaOffsetReaderConsumer: Partitions added: Map()
+26/01/17 01:24:22 INFO KafkaOffsetReaderConsumer: Partitions added: Map()
+26/01/17 01:24:22 INFO KafkaOffsetReaderConsumer: Partitions added: Map()
+26/01/17 01:24:22 INFO KafkaOffsetReaderConsumer: Partitions added: Map()
+26/01/17 01:24:22 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+26/01/17 01:24:22 INFO CodeGenerator: Code generated in 96.222 ms
+26/01/17 01:24:22 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+26/01/17 01:24:22 INFO CodeGenerator: Code generated in 37.934625 ms
+26/01/17 01:24:22 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+26/01/17 01:24:22 INFO CodeGenerator: Code generated in 45.486042 ms
+26/01/17 01:24:22 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+26/01/17 01:24:22 INFO CodeGenerator: Code generated in 41.841541 ms
+26/01/17 01:24:22 INFO MemoryStore: Block broadcast_28 stored as values in memory (estimated size 374.7 KiB, free 365.9 MiB)
+26/01/17 01:24:22 INFO MemoryStore: Block broadcast_28_piece0 stored as bytes in memory (estimated size 37.9 KiB, free 365.9 MiB)
+26/01/17 01:24:22 INFO BlockManagerInfo: Added broadcast_28_piece0 in memory on 34b367be0d1a:41201 (size: 37.9 KiB, free: 366.3 MiB)
+26/01/17 01:24:22 INFO SparkContext: Created broadcast 28 from start at NativeMethodAccessorImpl.java:0
+26/01/17 01:24:22 INFO MemoryStore: Block broadcast_29 stored as values in memory (estimated size 374.7 KiB, free 365.5 MiB)
+26/01/17 01:24:22 INFO MemoryStore: Block broadcast_29_piece0 stored as bytes in memory (estimated size 37.9 KiB, free 365.5 MiB)
+26/01/17 01:24:22 INFO BlockManagerInfo: Added broadcast_29_piece0 in memory on 34b367be0d1a:41201 (size: 37.9 KiB, free: 366.2 MiB)
+26/01/17 01:24:22 INFO SparkContext: Created broadcast 29 from start at NativeMethodAccessorImpl.java:0
+26/01/17 01:24:23 ERROR MicroBatchExecution: Query [id = f244f81e-1fe0-4ec4-856d-74f618bac6d2, runId = d6e5baa0-c969-431c-83f2-c78a58abe8e2] terminated with error
+py4j.Py4JException: An exception was raised by the Python Proxy. Return Message: Traceback (most recent call last):
+  File "/spark/python/lib/py4j-0.10.9.5-src.zip/py4j/clientserver.py", line 617, in _call_proxy
+    return_value = getattr(self.pool[obj_id], method)(*params)
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/utils.py", line 272, in call
+    raise e
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/utils.py", line 269, in call
+    self.func(DataFrame(jdf, self.session), batch_id)
+  File "/app/etl_job.py", line 189, in write_batch
+    df.write.mode("append").jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/readwriter.py", line 1340, in jdbc
+    self.mode(mode)._jwrite.jdbc(url, table, jprop)
+  File "/spark/python/lib/py4j-0.10.9.5-src.zip/py4j/java_gateway.py", line 1322, in __call__
+    answer, self.gateway_client, self.target_id, self.name)
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/utils.py", line 196, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: Column "action" not found in schema Some(StructType(StructField(window_start,TimestampType,false),StructField(window_end,TimestampType,true),StructField(url,StringType,false),StructField(view_count,LongType,true)))
+
+        at py4j.Protocol.getReturnValue(Protocol.java:476)
+        at py4j.reflection.PythonProxyHandler.invoke(PythonProxyHandler.java:108)
+        at com.sun.proxy.$Proxy51.call(Unknown Source)
+        at org.apache.spark.sql.execution.streaming.sources.PythonForeachBatchHelper$.$anonfun$callForeachBatch$1(ForeachBatchSink.scala:51)
+        at org.apache.spark.sql.execution.streaming.sources.PythonForeachBatchHelper$.$anonfun$callForeachBatch$1$adapted(ForeachBatchSink.scala:51)
+        at org.apache.spark.sql.execution.streaming.sources.ForeachBatchSink.addBatch(ForeachBatchSink.scala:32)
+        at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runBatch$17(MicroBatchExecution.scala:660)
+        at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:109)
+        at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:169)
+        at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:95)
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:779)
+        at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:64)
+        at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runBatch$16(MicroBatchExecution.scala:658)
+        at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken(ProgressReporter.scala:375)
+        at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken$(ProgressReporter.scala:373)
+        at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:68)
+        at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runBatch(MicroBatchExecution.scala:658)
+        at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runActivatedStream$2(MicroBatchExecution.scala:255)
+        at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+        at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken(ProgressReporter.scala:375)
+        at org.apache.spark.sql.execution.streaming.ProgressReporter.reportTimeTaken$(ProgressReporter.scala:373)
+        at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:68)
+        at org.apache.spark.sql.execution.streaming.MicroBatchExecution.$anonfun$runActivatedStream$1(MicroBatchExecution.scala:218)
+        at org.apache.spark.sql.execution.streaming.ProcessingTimeExecutor.execute(TriggerExecutor.scala:67)
+        at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runActivatedStream(MicroBatchExecution.scala:212)
+        at org.apache.spark.sql.execution.streaming.StreamExecution.$anonfun$runStream$1(StreamExecution.scala:307)
+        at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:779)
+        at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:285)
+        at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:208)
+26/01/17 01:24:23 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Revoke previously assigned partitions clicks_topic-0
+26/01/17 01:24:23 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] The pause flag in partitions [clicks_topic-0] will be removed due to revocation.
+26/01/17 01:24:23 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Member consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1-5a8b5cd1-6976-484a-9b40-54a63f1e935a sending LeaveGroup request to coordinator kafka:29092 (id: 2147483646 rack: null) due to the consumer is being closed
+26/01/17 01:24:23 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Resetting generation and member id due to: consumer pro-actively leaving the group
+26/01/17 01:24:23 INFO ConsumerCoordinator: [Consumer clientId=consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1, groupId=spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0] Request joining group due to: consumer pro-actively leaving the group
+26/01/17 01:24:23 INFO Metrics: Metrics scheduler closed
+26/01/17 01:24:23 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
+26/01/17 01:24:23 INFO Metrics: Metrics reporters closed
+26/01/17 01:24:23 INFO AppInfoParser: App info kafka.consumer for consumer-spark-kafka-source-075dcf1b-5bc4-4fb6-a6da-adab3cb9900a--400440711-driver-0-1 unregistered
+Query [id = f244f81e-1fe0-4ec4-856d-74f618bac6d2, runId = d6e5baa0-c969-431c-83f2-c78a58abe8e2] terminated with exception: An exception was raised by the Python Proxy. Return Message: Traceback (most recent call last):
+  File "/spark/python/lib/py4j-0.10.9.5-src.zip/py4j/clientserver.py", line 617, in _call_proxy
+    return_value = getattr(self.pool[obj_id], method)(*params)
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/utils.py", line 272, in call
+    raise e
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/utils.py", line 269, in call
+    self.func(DataFrame(jdf, self.session), batch_id)
+  File "/app/etl_job.py", line 189, in write_batch
+    df.write.mode("append").jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/readwriter.py", line 1340, in jdbc
+    self.mode(mode)._jwrite.jdbc(url, table, jprop)
+  File "/spark/python/lib/py4j-0.10.9.5-src.zip/py4j/java_gateway.py", line 1322, in __call__
+    answer, self.gateway_client, self.target_id, self.name)
+  File "/spark/python/lib/pyspark.zip/pyspark/sql/utils.py", line 196, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: Column "action" not found in schema Some(StructType(StructField(window_start,TimestampType,false),StructField(window_end,TimestampType,true),StructField(url,StringType,false),StructField(view_count,LongType,true)))
+
+26/01/17 01:24:23 WARN SparkConnectorContext$: Finish cancelling all queries for app-20260117012343-0001
+26/01/17 01:24:23 INFO ServerConnection$: Close all 1 cached connection.
+26/01/17 01:24:23 INFO SparkUI: Stopped Spark web UI at http://34b367be0d1a:4040
+26/01/17 01:24:23 INFO StandaloneSchedulerBackend: Shutting down all executors
+26/01/17 01:24:23 INFO CoarseGrainedSchedulerBackend$DriverEndpoint: Asking each executor to shut down
+26/01/17 01:24:23 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+26/01/17 01:24:23 INFO MemoryStore: MemoryStore cleared
+26/01/17 01:24:23 INFO BlockManager: BlockManager stopped
+26/01/17 01:24:23 INFO BlockManagerMaster: BlockManagerMaster stopped
+26/01/17 01:24:23 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+26/01/17 01:24:24 INFO SparkContext: Successfully stopped SparkContext
+26/01/17 01:24:24 INFO ShutdownHookManager: Shutdown hook called
+26/01/17 01:24:24 INFO ShutdownHookManager: Deleting directory /tmp/spark-83852b72-be9b-40ed-911a-2567c2955bde
+26/01/17 01:24:24 INFO ShutdownHookManager: Deleting directory /tmp/temporary-f96368b1-b7f4-46b7-9157-073e0f775324
+26/01/17 01:24:24 INFO ShutdownHookManager: Deleting directory /tmp/spark-83852b72-be9b-40ed-911a-2567c2955bde/pyspark-f60ce60b-ab89-4aae-ae53-9cddef49ed77
+26/01/17 01:24:25 INFO ShutdownHookManager: Deleting directory /tmp/spark-24bfc332-65a8-4901-af1c-33e44f2bf232
+26/01/17 01:24:25 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+26/01/17 01:24:25 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+26/01/17 01:24:25 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
