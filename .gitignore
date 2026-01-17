@@ -6,5 +6,4 @@ ex00/postgres_data/
 ex00/spark-logs/
 ex00/.env
 ex00/CREDENTIALS_SETUP.md
-# ex02/.env
 ex02/logs.txt

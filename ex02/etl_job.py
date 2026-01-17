@@ -5,8 +5,6 @@ from pyspark.sql.types import StructType, StructField, StringType, TimestampType
 # from snowflake.connector.pandas_tools import write_pandas
 import os
 
-# Securely load credentials from environment variables (set in docker-compose.yml)
-# Never hardcode credentials - they should be injected at runtime
 USER = os.getenv("SNOWFLAKE_USER")
 PASSWORD = os.getenv("SNOWFLAKE_PASSWORD")
 ACCOUNT = os.getenv("SNOWFLAKE_ACCOUNT")
@@ -14,9 +12,15 @@ WAREHOUSE = os.getenv("SNOWFLAKE_WAREHOUSE")
 DATABASE = os.getenv("SNOWFLAKE_DATABASE")
 SCHEMA = os.getenv("SNOWFLAKE_SCHEMA")
 
-# Validate that all required credentials are present
-if not all([USER, PASSWORD, ACCOUNT, WAREHOUSE, DATABASE, SCHEMA]):
-    raise ValueError("Missing required Snowflake environment variables. Check docker-compose.yml")
+sf_options = {
+	    "sfURL": f"{ACCOUNT}.snowflakecomputing.com",
+	    "sfUser": USER,
+	    "sfPassword": PASSWORD,
+	    "sfDatabase": DATABASE,
+	    "sfSchema": SCHEMA,
+	    "sfWarehouse": WAREHOUSE
+	}
+
 
 def connection_to_postgres():
 	postgres_url = "jdbc:postgresql://postgres:5432/ecommerce"
@@ -36,8 +40,6 @@ def connection_to_postgres():
 # 	}
 # 	return bigquery_url, bigquery_properties
 
-# Note: Snowflake connection is now handled via Spark connector in batch_ETL
-# No need for separate Python connector unless doing pandas operations
 
 def spark_connection():
 	aws_access_key_id = "minioadmin"
@@ -104,18 +106,7 @@ def batch_ETL(spark, postgres_url, postgres_properties):
 		.mode("overwrite") \
 		.jdbc(url=postgres_url, table="fact_orders", properties=postgres_properties)
 
-	# write to Snowflake
-	sf_options = {
-	    "sfURL": f"{ACCOUNT}.snowflakecomputing.com",
-	    "sfUser": USER,
-	    "sfPassword": PASSWORD,
-	    "sfDatabase": DATABASE,
-	    "sfSchema": SCHEMA,
-	    "sfWarehouse": WAREHOUSE
-	}
 
-	# Select only columns that exist in the DataFrame
-	# Matching the warehouse.sql schema: order_id, user_id, product_id, quantity, total_amount, signup_date, country, category, product_price
 	to_sf = final_result.select(
 	    "order_id", 
 	    "user_id", 
@@ -174,10 +165,10 @@ def stream_ETL(spark, postgres_url, postgres_properties):
 		.withWatermark("event_timestamp", "1 minute")\
 		.groupBy(
 			F.window("event_timestamp", "1 minute"),
-			"action"
+			"url"
 		)\
 		.count()\
-		.withColumnRenamed("count", "action_count")
+		.withColumnRenamed("count", "view_count")
 
 	# Flatten the window struct (start,end) into separate timestamp columns for JDBC
 	page_views_flat = page_views.withColumn("window_start", F.col("window.start"))\
@@ -188,9 +179,17 @@ def stream_ETL(spark, postgres_url, postgres_properties):
 	def write_batch(df, epoch_id):
 		df.write.mode("append").jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
 
+	def write_stream_to_snowflake(df, epoch_id):
+		df.write \
+		    .format("net.snowflake.spark.snowflake") \
+		    .options(**sf_options, dbtable="fact_page_views") \
+		    .mode("append") \
+			.save()
+
 	query = page_views_flat.writeStream \
 	    .outputMode("update") \
 	    .foreachBatch(write_batch) \
+        .foreachBatch(write_stream_to_snowflake) \
 	    .trigger(processingTime='1 minute') \
 	    .start()
 	
