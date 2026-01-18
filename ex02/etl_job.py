@@ -1,8 +1,6 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType
-# import snowflake.connector
-# from snowflake.connector.pandas_tools import write_pandas
 import os
 
 USER = os.getenv("SNOWFLAKE_USER")
@@ -63,7 +61,7 @@ def spark_connection():
 
 def batch_ETL(spark, postgres_url, postgres_properties):
 	
-	processing_date_str = "2026/01/17"
+	processing_date_str = "2026/01/18"
 	base_s3_path = f"s3a://raw-data/{processing_date_str}"
 		
 	users_df = spark.read.csv(f'{base_s3_path}/Users.csv', header=True, inferSchema=True)
@@ -125,7 +123,7 @@ def batch_ETL(spark, postgres_url, postgres_properties):
 	    .mode("overwrite") \
 	    .save()
 
-	print("loaded succesfuly")
+	print("batch loaded successfully")
 	pass
 
 def stream_ETL(spark, postgres_url, postgres_properties):
@@ -179,23 +177,33 @@ def stream_ETL(spark, postgres_url, postgres_properties):
 	def write_batch(df, epoch_id):
 		df.write.mode("append").jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
 
-	def write_stream_to_snowflake(df, epoch_id):
+		print(f"Stream {epoch_id}: Written to PostgreSQL")
+  
+	def write_into_sf(df, epoch_id):
 		df.write \
 		    .format("net.snowflake.spark.snowflake") \
 		    .options(**sf_options, dbtable="fact_page_views") \
 		    .mode("append") \
-			.save()
-
-	query = page_views_flat.writeStream \
+		    .save()
+		print(f"Stream {epoch_id}: Written to Snowflake")
+  
+  
+	query_pg = page_views_flat.writeStream \
 	    .outputMode("update") \
 	    .foreachBatch(write_batch) \
-        .foreachBatch(write_stream_to_snowflake) \
 	    .trigger(processingTime='1 minute') \
 	    .start()
 	
+	query_sf = page_views_flat.writeStream \
+	    .outputMode("update") \
+	    .foreachBatch(write_into_sf) \
+	    .trigger(processingTime='1 minute') \
+	    .start()
+    
 	print("Streaming query has been started.")
-	query.awaitTermination()
-	
+	query_pg.awaitTermination()
+	query_sf.awaitTermination()
+
 def main():
 
 	spark = spark_connection()

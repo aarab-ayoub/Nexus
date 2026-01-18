@@ -1,4 +1,227 @@
-Before running, verify your Spark version inside the container:
-docker exec -it spark-master /spark/bin/spark-shell --version
+## 1. Purpose of the Exercise
 
-This will tell you the exact Spark version, and you can pick the right Snowflake connector from: https://repo1.maven.org/maven2/net/snowflake/
+This Exercise demonstrates a complete data engineering pipeline covering **batch processing**, **stream processing**, and **orchestration** using industry-standard tools. The goal is not only to move data, but to understand *why* certain architectural decisions are made and how real-world pipelines are designed.
+
+The Exercise is intentionally structured to evolve:
+
+* Batch ingestion and transformation with Spark
+* Real-time streaming with Kafka and Spark Structured Streaming
+* Multi-sink loading (PostgreSQL + Snowflake)
+* Workflow orchestration with Apache Airflow (Exercise 03)
+
+---
+
+## 2. High-Level Architecture Overview
+
+The pipeline is split into **two independent data paths**:
+
+1. **Batch pipeline** (finite data)
+2. **Streaming pipeline** (infinite data)
+
+This separation is critical because batch and streaming systems have different execution semantics, failure modes, and performance constraints.
+
+---
+
+## 3. Batch Data Architecture (MinIO → Spark → PostgreSQL & Snowflake)
+
+### Data Source
+
+* MinIO (S3-compatible object storage)
+* Daily CSV files partitioned by processing date
+
+Example path:
+
+```
+s3a://raw-data/2026/01/17/
+  ├── Users.csv
+  ├── Products.csv
+  └── Orders.csv
+```
+
+### Batch Processing Flow
+
+1. Spark reads CSV files from MinIO
+2. Schema inference and basic cleaning
+3. Column normalization and type casting
+4. Join operations to build a fact table
+5. Write results to:
+
+   * PostgreSQL (operational analytics)
+   * Snowflake (analytical warehouse)
+
+### Why This Works Well for Batch
+
+* Data is finite
+* Job has a clear start and end
+* Spark can safely write to multiple sinks sequentially
+* Overwrite mode is acceptable
+
+### Batch Data Flow
+
+```
+MinIO (S3)
+   ↓
+Spark Batch Job
+   ↓
+PostgreSQL  ←→  Snowflake
+```
+
+---
+
+## 4. Streaming Data Architecture (Kafka → Spark → PostgreSQL & Snowflake)
+
+### Data Source
+
+* Kafka topic: `clicks_topic`
+* JSON-encoded clickstream events
+
+Example event:
+
+```
+{
+  "eventid": "e123",
+  "userid": "u42",
+  "url": "/product/7",
+  "timestamp": "2026-01-17T10:15:00",
+  "action": "view"
+}
+```
+
+### Streaming Processing Flow
+
+1. Spark reads events from Kafka using Structured Streaming
+2. JSON parsing with an explicit schema
+3. Event-time processing with watermarking
+4. Windowed aggregations (page views per URL per minute)
+5. Flattening window columns for JDBC compatibility
+
+---
+
+## 5. Critical Streaming Concept: Infinite Data
+
+Unlike batch jobs, **streaming jobs never terminate**.
+
+Spark processes streaming data as **micro-batches**:
+
+* Each micro-batch is finite
+* The stream itself is infinite
+
+This distinction is fundamental to understanding why sink design matters.
+
+---
+
+## 6. Why a Single foreachBatch with Two Sinks Is Dangerous
+
+In Structured Streaming:
+
+* `foreachBatch` executes **sequentially** per micro-batch
+* If one sink blocks or retries, downstream sinks are never executed
+
+In this project:
+
+* PostgreSQL JDBC writes are blocking and transactional
+* Snowflake Spark connector uses staging and COPY INTO
+
+Result:
+
+* PostgreSQL fills successfully
+* Snowflake remains empty
+* Spark is not "waiting for the stream to finish"
+* Spark is blocked inside the first sink
+
+This is not a threading issue. It is a **streaming sink orchestration issue**.
+
+---
+
+## 7. Chosen Solution: Option 1 – Two Independent Streaming Queries
+
+For this exercise, the correct and educationally sound solution is:
+
+* One streaming query per sink
+* Same source
+* Same transformations
+* Independent execution and failure isolation
+
+### Streaming Architecture (Option 1)
+
+```
+Kafka
+  ├── Spark Stream → PostgreSQL
+  └── Spark Stream → Snowflake
+```
+
+### Why This Is the Right Choice Now
+
+* Aligns with Spark Structured Streaming design
+* Avoids blocking sinks
+* Keeps logic simple
+* Matches real-world production patterns
+
+Option 2 (fan-out via Airflow or CDC) is intentionally deferred to Exercise 03.
+
+---
+
+## 8. Example Code Pattern for Option 1
+
+### PostgreSQL Sink
+
+```
+def write_to_postgres(df, epoch_id):
+    df.write \
+      .mode("append") \
+      .jdbc(url=postgres_url, table="fact_page_views", properties=postgres_properties)
+```
+
+### Snowflake Sink
+
+```
+def write_to_snowflake(df, epoch_id):
+    df.write \
+      .format("net.snowflake.spark.snowflake") \
+      .options(**sf_options, dbtable="fact_page_views") \
+      .mode("append") \
+      .save()
+```
+
+### Two Streaming Queries
+
+```
+query_pg = page_views_flat.writeStream \
+    .outputMode("update") \
+    .foreachBatch(write_to_postgres) \
+    .trigger(processingTime="1 minute") \
+    .start()
+
+query_sf = page_views_flat.writeStream \
+    .outputMode("update") \
+    .foreachBatch(write_to_snowflake) \
+    .trigger(processingTime="1 minute") \
+    .start()
+
+spark.streams.awaitAnyTermination()
+```
+
+---
+
+## 9. Preparing for Snowflake Connector Compatibility
+
+Spark and the Snowflake connector must match versions.
+
+Before running the job, verify the Spark version inside the container:
+
+```
+docker exec -it spark-master /spark/bin/spark-shell --version
+```
+
+Then select the correct Snowflake connector from:
+
+```
+https://repo1.maven.org/maven2/net/snowflake/
+```
+
+Example:
+
+* Spark 3.5.x → `spark-snowflake_2.12`
+* Scala version must match Spark’s Scala version
+
+---
